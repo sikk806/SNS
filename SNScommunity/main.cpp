@@ -7,6 +7,7 @@ int main(void) {
 	string test_post = "./data/post_1.txt";
 	
 	Board b;
+	
 
 
 	b.mainPost(1);
