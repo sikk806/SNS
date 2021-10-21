@@ -15,4 +15,7 @@ public:
     boardPost();
     ~boardPost();
     void Post();
+    int Report(int data);
+    int check_fspace(string s);
+    int check_(string s);
 };
