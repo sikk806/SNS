@@ -99,7 +99,6 @@ void boardPost::Post()
              << " 뒤로가기(B/b)" << endl;
         string command;
         cin >> command;
-
         if (command == "1")
         {
             //댓글 작성창
@@ -150,6 +149,7 @@ void boardPost::Post()
                     else
                     {
                         cout << "잘못된 입력방식입니다3" << endl;
+                        sleep(1);
                         //back show
                     }
                 }
@@ -158,9 +158,10 @@ void boardPost::Post()
         else if (command == "2")
         {
             cout << "신고를 하시겠습니까?" << endl;
-            char command_report;
+            string command_report;
             cin >> command_report;
-            if (command_report == 'Y' || command_report == 'y')
+            cin.ignore();
+            if (command_report == "Y" || command_report == "y")
             {
                 //신고수 += 1
                 fstream post_content;
@@ -179,7 +180,7 @@ void boardPost::Post()
                     post_content.put('/');
                 }
             }
-            else if (command_report == 'N' || command_report == 'n')
+            else if (command_report == "N" || command_report == "n")
             {
                 //신고 취소
             }
@@ -193,9 +194,9 @@ void boardPost::Post()
         else if (command == "3")
         {
             cout << "추천을 하시겠습니까?" << endl;
-            char command_recommand;
+            string command_recommand;
             cin >> command_recommand;
-            if (command_recommand == 'Y' || command_recommand == 'y')
+            if (command_recommand == "Y" || command_recommand == "y")
             {
                 //추천수 += 1
                 int num_recommand = stoi(data[6]);
@@ -214,7 +215,7 @@ void boardPost::Post()
                     post_content.put('/');
                 }
             }
-            else if (command_recommand == 'N' || command_recommand == 'n')
+            else if (command_recommand == "N" || command_recommand == "n")
             {
                 //추천취소
             }
@@ -247,16 +248,17 @@ void boardPost::Post()
 
                     if (title.empty())
                     {
-                        cout << "잘못된 입력방식입니다1" << endl;
+                        cout << "잘못된 입력방식입니다" << endl;
                         sleep(1);
                     }
-                    else if (title.size() == 1 && title == "b" && title == "B")
+                    else if (title.size() == 1 && (title.compare("b") == 0 || title.compare("B") == 0))
                     {
+                        break;
                     }
                     //(s.size() != s1.size()) ||
-                    else if (title.size() < 2 || title.size() > 100 || check_fspace(title) == 0 || check_(title) == 1)
+                    else if (title.size() < 2 || title.size() > 35 || check_fspace(title) == 0 || check_(title) == 1)
                     {
-                        cout << "잘못된 입력방식입니다2" << endl;
+                        cout << "잘못된 입력방식입니다" << endl;
                         sleep(1);
                     }
                     //입력 검사요소를 모두 통과하였을때
@@ -265,20 +267,20 @@ void boardPost::Post()
                         system("clear");
                         cout << "본문 : ";
                         string contents;
-                        cin.ignore(); // 개행문자(Enter) 입력을 막기위해서 넣어준 메쏘드
+                        // cin.ignore(); // 개행문자(Enter) 입력을 막기위해서 넣어준 메쏘드
                         getline(cin, contents);
                         if (contents.empty())
                         {
-                            cout << "잘못된 입력방식입니다1" << endl;
+                            cout << "잘못된 입력방식입니다" << endl;
                             sleep(1);
                         }
                         else if (contents.size() == 1 && (contents.compare("b") == 0 || contents.compare("B") == 0))
                         {
                             break;
                         }
-                        else if (contents.size() < 2 || contents.size() > 100 || check_fspace(contents) == 0 || check_(contents) == 1)
+                        else if (contents.size() < 2 || contents.size() > 300 || check_fspace(contents) == 0 || check_(contents) == 1)
                         {
-                            cout << "잘못된 입력방식입니다2" << endl;
+                            cout << "잘못된 입력방식입니다" << endl;
                             sleep(1);
                         }
                         else
@@ -310,7 +312,7 @@ void boardPost::Post()
                                 break;
                             }
                             else{
-                                cout << "잘못된 입력방식입니다2" << endl;
+                                cout << "잘못된 입력방식입니다" << endl;
                                 sleep(1);
                             }
                         }
@@ -322,7 +324,7 @@ void boardPost::Post()
             }
             else
             {
-                cout << "잘못된 입력방식입니다3" << endl;
+                cout << "잘못된 입력방식입니다" << endl;
                 sleep(1);
             }
         }
@@ -330,6 +332,7 @@ void boardPost::Post()
         else if (command == "B" || command == "b")
         {
             //게시글목록으로 가야함
+            break;
         }
         else
         {
