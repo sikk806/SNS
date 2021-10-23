@@ -166,7 +166,7 @@ void Board::createPost(string _userid, string _category, int _postnum) {
 
 	string _currentnum = to_string(++_postnum);
 
-	string _total
+	string _total;
 
 	cout << "Á¦¸ñ : ";
 	cin >> _title;
