@@ -15,5 +15,6 @@ private:
 public:
 	Board();
 	~Board();
-	void mainPost(int page);
+	void selectCategory(string user_id);
+	void mainPost(string _userid, string _category);
 };
