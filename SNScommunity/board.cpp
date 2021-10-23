@@ -59,7 +59,6 @@ void Board::mainPost(string _userid, string _category, int _getFile) {
 	system("cls"); // Windows.h
 
 	int _cntFile = numFile(_category);
-	cout << "ÆÄÀÏ °¹¼ö : " << _cntFile << endl;
 	if (_getFile == 0) {
 		_getFile = _cntFile;
 	}
@@ -91,7 +90,13 @@ void Board::mainPost(string _userid, string _category, int _getFile) {
 		setColor(GREEN);
 		cout << i << ". " << data[3] << endl;
 		setColor(WHITE);
-		cout << "	- " << data[4] << endl;
+		if (data[4].length() > 20) {
+			string _substring = data[4].substr(0, 20);
+			cout << "	- " << _substring << endl;
+		}
+		else {
+			cout << "	- " << data[4] << endl;
+		}
 		_getFile--;
 
 		openpost.close();
