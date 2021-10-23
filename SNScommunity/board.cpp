@@ -134,6 +134,9 @@ void Board::mainPost(string _userid, string _category, int _getFile) {
 	else if (select == "F" || select == "f") {
 		mainPost(_userid, _category, _getFile);
 	}
+	else if (select == "W" || select == "w") {
+		createPost(_userid, _category, _cntFile);
+	}
 
 	else if (select == "0" || select == "1" || select == "2" || select == "3" || select == "4" || select == "5" || select == "6" || select == "7" || select == "8" || select == "9") {
 		int _select = stoi(select);
@@ -204,9 +207,15 @@ void Board::createPost(string _userid, string _category, int _postnum) {
 		total.push_back(_title);
 		total.push_back("/");
 		total.push_back(_content);
-	}
 
+		savepost.close();
+	}
+	else {
+		cerr << "정보를 불러오는데에 실패하였습니다." << endl;
+	}
 	
+	// 파일 작성이 끝나면 갱신된 파라미터로 다시 mainPost 함수 호출
+	mainPost(_userid, _category, _postnum);
 
 }
 
