@@ -1,5 +1,4 @@
 #include "board.h"
-
 using namespace std;
 
 Board::Board() {
@@ -12,7 +11,7 @@ Board::~Board() {
 
 void Board::selectCategory(string _userid) {
 	system("cls");
-	cout << "===========================" << endl;
+	cout << "========== =================" << endl;
 	cout << endl;
 	cout << "      카테고리 선택" << endl;
 	cout << endl;
@@ -51,6 +50,7 @@ void Board::mainPost(string _userid, string _category) {
 	cout << "파일 갯수 : " << _cntFile << endl;
 	
 	int _getFile = _cntFile;
+	int _postnum = _cntFile;
 
 	for (int i = 1; i <= 10; i++) {
 		// 파일명은 자연수만 가능 (0이하로는 금지)
@@ -76,8 +76,9 @@ void Board::mainPost(string _userid, string _category) {
 			data.push_back(line);
 		}
 		
-		
+		// 제목 출력
 		cout << i << ". " << data[3] << endl;
+		// 본문 출력
 		cout << "	- " << data[4] << endl;
 		_getFile--;
 	}
@@ -107,6 +108,39 @@ void Board::mainPost(string _userid, string _category) {
 		page++;
 		mainPost(page);
 	}*/
+
+
+	if (select == 'W' || select == 'w') {
+		createPost(_userid, _category, _postnum);
+	}
+}
+
+void Board::createPost(string _userid, string _category, int _postnum) {
+	//system("clear"); // Mac command
+	system("cls"); // Windows.h
+
+	string _title, _content, _path;
+
+	string _currentnum = to_string(++_postnum);
+
+	string _total
+
+	cout << "제목 : ";
+	cin >> _title;
+	cout << endl;
+	cout << "본문 : ";
+	cin >> _content;
+
+	_path += _category + "/" + _currentnum + ".txt";
+
+	ofstream savepost(_path);
+
+	if (savepost.is_open()) {
+
+	}
+
+	
+
 }
 
 int Board::numFile(string _category) {
@@ -129,4 +163,13 @@ int Board::numFile(string _category) {
 	finder.Close();
 
 	return _cnt;
+}
+
+bool Board::checkWords(string _words)
+{
+	string words = _words;
+
+	/* regex 예외처리 부분은 나중에 */
+
+	return false;
 }
