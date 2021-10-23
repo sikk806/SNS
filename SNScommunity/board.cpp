@@ -175,6 +175,7 @@ void Board::createPost(string _userid, string _category, int _postnum) {
 
 	cout << "제목 : ";
 	cin >> _title;
+	cout << "=========================================";
 	cout << endl;
 	cout << "본문 : ";
 	cin >> _content;
