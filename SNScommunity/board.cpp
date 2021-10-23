@@ -36,7 +36,6 @@ void Board::selectCategory(string _userid) {
 	if (_select >= 49 && _select <= 52 ) {
 		string _category = "./data/post_";
 		_category += _select;
-		_category += ".txt";
 		
 		mainPost(_userid, _category);
 	}
@@ -45,58 +44,89 @@ void Board::selectCategory(string _userid) {
 }
 
 void Board::mainPost(string _userid, string _category) {
+	//system("clear"); // Mac command
 	system("cls"); // Windows.h
-	ifstream cnt_lines("./data/post_1.txt");
 
-	cout << _userid << _category << endl;
+	int _cntFile = numFile(_category);
+	cout << "파일 갯수 : " << _cntFile << endl;
+	
+	int _getFile = _cntFile;
 
-	int num_data = 0;
-	string cnt_line;
-	while (getline(cnt_lines, cnt_line)) {
-		num_data++;
+	for (int i = 1; i <= 10; i++) {
+		// 파일명은 자연수만 가능 (0이하로는 금지)
+		if (_getFile == 0) {
+			break;
+		}
+		// 파일명은 파일 최대 갯수를 넘을 수 없음.
+		else if (_getFile > _cntFile) {
+			break;
+		}
+		string _fname = to_string(_getFile);
+		string _filename = _category + "/" + _fname + ".txt";
+
+		ifstream openpost(_filename);
+
+		string line;
+		getline(openpost, line);
+		stringstream ss(line);
+
+		vector<string> data;
+
+		while (getline(ss, line, '/')) {
+			data.push_back(line);
+		}
+		
+		
+		cout << i << ". " << data[3] << endl;
+		cout << "	- " << data[4] << endl;
+		_getFile--;
 	}
-	cnt_lines.close();
 
-	//ifstream openpost("./data/post_1.txt");
-	//for (int i = 1; i <= 10; i++) {
-	//	string line;
-	//	getline(openpost, line);
-	//	stringstream ss(line);
+	
+	cout << "Page. " << (_cntFile - _getFile)/10 << "/" << (_cntFile/10 + 1) << endl;
+	cout << "W/w. 게시글 작성" << endl;
+	/*if ( != 2) {
+		cout << "F/f. 다음 페이지로" << endl;
+	}
 
-	//	vector<string> data;
+	if (page == 1) {
+		cout << "B/b. 카테고리 선택" << endl;
+	}
+	else {
+		cout << "B/b. 이전 페이지로" << endl;
+	}*/
 
-	//	while (getline(ss, line, '/')) {
-	//		data.push_back(line);
-	//	}
-	//	
-	//	if (num_data != 0) {
-	//		cout << i << ". " << data[3] << endl;
-	//		cout << "	- " << data[4] << endl;
-	//	}
-	//}
+	char select;
+	cin >> select;
+	/*
+	if (select == 'B' || select == 'b') {
+		page--;
+		mainPost(page);
+	}
+	else if (select == 'F' || select == 'f') {
+		page++;
+		mainPost(page);
+	}*/
+}
 
-	//cout << "Page. " << page << "/2" << endl; // 총 페이지 알 수 있는 함수 만들어야함.
-	//cout << "W/w. 게시글 작성" << endl;
-	//if (page != 2) {
-	//	cout << "F/f. 다음 페이지로" << endl;
-	//}
+int Board::numFile(string _category) {
+	int _cnt = 0;
 
-	//if (page == 1) {
-	//	cout << "B/b. 카테고리 선택" << endl;
-	//}
-	//else {
-	//	cout << "B/b. 이전 페이지로" << endl;
-	//}
+	CFileFind finder;
+	CString _foldername = _category.c_str();
 
-	//char select;
-	//cin >> select;
+	BOOL _existfolder = finder.FindFile(_foldername + "/*.*");
 
-	//	if (select == 'B' || select == 'b') {
-	//		page--;
-	//		mainPost(page);
-	//	}
-	//	else if (select == 'F' || select == 'f') {
-	//		page++;
-	//		mainPost(page);
-	//	}
+	while (_existfolder) {
+		_existfolder = finder.FindNextFile();
+		if (finder.IsDots()) {
+			continue;
+		}
+		_cnt++;
+		
+	}
+
+	finder.Close();
+
+	return _cnt;
 }
