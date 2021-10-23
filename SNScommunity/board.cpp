@@ -1,4 +1,6 @@
 #include "board.h"
+#include <cstdio>
+#include <ctime>
 using namespace std;
 
 Board::Board() {
@@ -166,7 +168,7 @@ void Board::createPost(string _userid, string _category, int _postnum) {
 
 	string _currentnum = to_string(++_postnum);
 
-	string _total;
+	vector<string> total;
 
 	cout << "제목 : ";
 	cin >> _title;
@@ -179,7 +181,29 @@ void Board::createPost(string _userid, string _category, int _postnum) {
 	ofstream savepost(_path);
 
 	if (savepost.is_open()) {
+		time_t rawtime;
+		tm* timeinfo;
+		char buffer[80];
 
+		time(&rawtime);
+		timeinfo = localtime(&rawtime);
+
+		strftime(buffer, 80, "%Y-%m-%d-%H-%M", timeinfo);
+		puts(buffer);
+
+		string _datetime(buffer);
+
+		// 파일 내용 작성 (파일번호/유저아이디/포매팅된날짜/제목/본문)
+		// 추천수나 신고수는 추후에 다른 함수에서 추가해주기
+		total.push_back(_currentnum);
+		total.push_back("/");
+		total.push_back(_userid);
+		total.push_back("/");
+		total.push_back(_datetime);
+		total.push_back("/");
+		total.push_back(_title);
+		total.push_back("/");
+		total.push_back(_content);
 	}
 
 	
