@@ -1,10 +1,11 @@
 #include <iostream>
+#include <cstdlib>
 #include <fstream>
 #include <string>
 
 using namespace std;
 
-class User{         //  유저 클래스 정의 id, pw 만 정의 해 뒀습니다. 일단은 생성자, 소멸자, getter, setter 만 했습니다. 수정할 것 있으면 하시고 주석 부탁드려요!!
+class User{
 private:
     string id;
     string pw;
@@ -38,7 +39,7 @@ void sign_up_user_(User _user){     //  회원가입에 쓰이는 함수, User �
     member_list.put('\n');
 }
 
-bool is_exist_user_(User _user){        //  회원가입 전에 이미 등록된 아이디가 있는지 확인하는 함수
+bool is_exist_user_(User _user){        //  회원가입 전에 이미 등록된 아이디가 있는지 확인하는 함수 -> 객체로 확인
     string _id = _user.getId();
     // string pw = user.getPw();
     fstream _member_list;
@@ -56,7 +57,24 @@ bool is_exist_user_(User _user){        //  회원가입 전에 이미 등록된
     return _flag;
 }
 
-bool is_correct_id_(string _id){        //  사용자가 입력한 id 가 적적한 id인지를 검사하는 함수
+bool is_exist_user_(string _user){        //  회원가입 전에 이미 등록된 아이디가 있는지 확인하는 함수 -> 아이디로 확인
+    string _id = _user;
+    fstream _member_list;
+    _member_list.open("member_infromation.txt", ios::in);
+    string _member_info;     //  member_info -> buffer
+    bool _flag = false;
+    while(getline(_member_list, _member_info)){
+        int _id_idx = _member_info.find_first_of('/');
+        string _compare_id = _member_info.substr(0, _id_idx);
+        if(_id == _compare_id){
+            _flag = true;
+            break;
+        }
+    }
+    return _flag;
+}
+
+bool is_correct_id_(string _id){        //  사용자가 입력한 id 가 적절한 id인지를 검사하는 함수
     bool _flag = true;
     int _len = _id.length();
     if(_len >= 7 && _len <= 14){      //  길이가 만족한 애들만 올바른 문자인지 검사
