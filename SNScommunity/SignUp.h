@@ -13,8 +13,8 @@ public:
     SignUp(std::string id, std::string pw);
     ~SignUp();
     
-    std::string get_id_() {return this->id;}
-    std::string get_pw_() {return this->pw;}
+    std::string get_id_();
+    std::string get_pw_();
 
     void sign_up_user_();
     bool is_exist_user_(std::string _id);
