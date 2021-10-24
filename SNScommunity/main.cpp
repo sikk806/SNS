@@ -1,4 +1,5 @@
 #include "board.h"
+#include "SignUp.h"
 #include <iostream>
 #include <fstream>
 #include <string>

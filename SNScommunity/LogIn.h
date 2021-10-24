@@ -1,6 +1,15 @@
+#pragma once
 #include <iostream>
-#include <fstream>
 #include <string>
-#include "SignUp.h"
-
-using namespace std;
+#include <fstream>
+using std::string;
+class Login
+{
+private:
+    string userID;
+    string password;
+public:
+    ~Login();
+    Login(const string& ID, const string& pw);
+    void login();
+};
