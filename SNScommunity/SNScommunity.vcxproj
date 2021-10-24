@@ -144,10 +144,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="board.cpp" />
+    <ClCompile Include="LogIn.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="boardPost.cpp" />
+    <ClCompile Include="SignUp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="board.h" />
+    <ClInclude Include="boardPost.h" />
+    <ClInclude Include="Community.h" />
+    <ClInclude Include="LogIn.h" />
+    <ClInclude Include="SignUp.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".DS_Store" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

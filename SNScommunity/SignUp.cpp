@@ -79,7 +79,7 @@ bool SignUp::is_correct_pw_(std::string _pw){
 bool SignUp::sign_up_main_(){
     std::string _id, _pw;
     // system("clear");  //    for mac command
-    // system("cls"); //    for windows command
+    system("cls"); //    for windows command
     std::cout << "==================================\n";
     std::cout << "아이디 : \n";
     std::cin >> _id;
@@ -104,7 +104,7 @@ bool SignUp::sign_up_main_(){
         }
     }
     // system("clear");
-    // system("cls");
+    system("cls");
     std::cout << "==================================\n";
     std::cout << "비밀번호 : \n";
     std::cin >> _pw;
@@ -117,7 +117,7 @@ bool SignUp::sign_up_main_(){
             return false;   //  만약 b/B 가 입력되면 false 로 return
     }
     // system("clear");
-    // system("cls");
+    system("cls");
     SignUp _user(_id, _pw);
     _user.sign_up_user_();
     std::cout << "회원가입 성공\n";

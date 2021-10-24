@@ -37,7 +37,6 @@ void Board::selectCategory(string _userid) {
 	cout << "로그아웃을 원하시면 0을 입력해주세요. : ";
 	cin >> _select;
 
-	// ascii '1' = 49 || '4' = 52
 	if (_select == "1" || _select == "2" || _select == "3" || _select == "4") {
 		string _category = "./data/post_";
 		_category += _select;
@@ -88,9 +87,7 @@ void Board::mainPost(string _userid, string _category, int _getFile) {
 			data.push_back(line);
 		}
 		
-		setColor(GREEN);
 		cout << i << ". " << data[3] << endl;
-		setColor(WHITE);
 		if (data[4].length() > 20) {
 			string _substring = data[4].substr(0, 20);
 			cout << "	- " << _substring << endl;
@@ -148,6 +145,12 @@ void Board::mainPost(string _userid, string _category, int _getFile) {
 		}
 		else {
 			int _postnum = _cntFile - ((_cntFile - (_getFile + 1)) / 10) * 10 - _select; // 넘겨줄 파일 번호
+			string _pn = to_string(_postnum);
+			string subCategory = _category.substr(7, _category.size()-1);
+			string dir = subCategory + "/" + _pn + ".txt";
+
+			boardPost bP;
+			bP.Post(dir, _userid);
 		}
 	}
 	else {
@@ -208,13 +211,23 @@ void Board::createPost(string _userid, string _category, int _postnum) {
 		total.push_back(_title);
 		total.push_back("/");
 		total.push_back(_content);
-
-		savepost.close();
+		total.push_back("/0/0/");
 	}
 	else {
 		cerr << "정보를 불러오는데에 실패하였습니다." << endl;
 	}
 	
+	string _post = "";
+
+
+	for (int i = 0; i < total.size(); i++) {
+		_post += total[i];
+	}
+
+	savepost << _post;
+	savepost.close();
+
+
 	// 파일 작성이 끝나면 갱신된 파라미터로 다시 mainPost 함수 호출
 	mainPost(_userid, _category, _postnum);
 
