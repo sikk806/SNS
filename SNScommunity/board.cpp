@@ -90,7 +90,7 @@ void Board::mainPost(string _userid, string _category, int _getFile) {
 			while (getline(ss, line, '/')) {
 				data.push_back(line);
 			}
-			if (stoi(data[5]) >= 10 && (stoi(data[5]) / stoi(data[6])) >= 1) {
+			if (stoi(data[5]) >= 10 && (stoi(data[6]) / stoi(data[5])) < 1) {
 				cout << i << ". " << "신고가 많은 글입니다." << endl;
 				cout << "	- 글을 보시려면 " << i << "번을 입력해주세요." << endl;
 			}
