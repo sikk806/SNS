@@ -1,7 +1,5 @@
 #include "LogIn.h"
 
-
-using std::string;
 Login::Login() {
 
 }
@@ -18,15 +16,15 @@ Login::Login(const string& ID, const string& pw)
 
 void Login::login()
 {
-    std::ifstream file("./data/member_information.txt", std::ios::in); //파일 불러오기
-    std::vector<string> result;
+    ifstream file("./data/member_information.txt", ios::in); //파일 불러오기
+    vector<string> result;
     bool flag;
     if (file.is_open())
     {
         string user;
         while(getline(file,user)) //파일 읽기
         {
-            std::stringstream ss(user);
+            stringstream ss(user);
             flag = false;
             result.clear();
             while(ss.good())   //id와 pw가져오기
@@ -41,7 +39,7 @@ void Login::login()
                 if(result.at(i) == userID && result.at(i+1) == password)
                 {
                     // 로그인 성공
-                    std::cout<<"Login successful: "<<userID<<", "<<password<<std::endl;
+                    cout<<"Login successful: "<<userID<<", "<<password<<endl;
                     Sleep(1000);
                     flag = true;
                     //다음 과정 진행
@@ -53,14 +51,14 @@ void Login::login()
                 break;
         }
         if (!flag) {
-            std::cout << "Login failed: " << userID << ", " << password << std::endl;
+            cout << "Login failed: " << userID << ", " << password << endl;
             Sleep(1000);
         }
         file.close();
     }
     else //파일 불러오기 실패
     {
-        std::cout << "Failed to open file" << std::endl;
+        cout << "Failed to open file" << endl;
         Sleep(1000);
     }
 }
