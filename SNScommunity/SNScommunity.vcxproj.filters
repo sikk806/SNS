@@ -21,9 +21,6 @@
     <ClCompile Include="board.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="LogIn.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="boardPost.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -31,6 +28,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="MainPrompt.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="LogIn.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
