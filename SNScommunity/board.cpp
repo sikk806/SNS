@@ -186,11 +186,12 @@ void Board::createPost(string _userid, string _category, int _postnum) {
 	vector<string> total;
 
 	cout << "제목 : ";
-	cin >> _title;
+	cin.ignore();
+	getline(cin, _title);
 	cout << "=========================================";
 	cout << endl;
 	cout << "본문 : ";
-	cin >> _content;
+	getline(cin, _content);
 
 	_path += _category + "/" + _currentnum + ".txt";
 
