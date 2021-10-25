@@ -1,11 +1,15 @@
 #include "LogIn.h"
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <sstream>
-#include <vector>
+
 
 using std::string;
+Login::Login() {
+
+}
+
+Login::~Login() {
+
+}
+
 Login::Login(const string& ID, const string& pw)
     :userID(ID), password(pw)
 {
@@ -14,7 +18,7 @@ Login::Login(const string& ID, const string& pw)
 
 void Login::login()
 {
-    std::ifstream file("data/userInfo.txt", std::ios::in); //파일 불러오기
+    std::ifstream file("./data/member_information.txt", std::ios::in); //파일 불러오기
     std::vector<string> result;
     bool flag;
     if (file.is_open())
@@ -38,21 +42,26 @@ void Login::login()
                 {
                     // 로그인 성공
                     std::cout<<"Login successful: "<<userID<<", "<<password<<std::endl;
+                    Sleep(1000);
                     flag = true;
                     //다음 과정 진행
-
+                    Board b;
+                    b.selectCategory(userID);
                 }
             }
             if(flag) //이미 일치하는 아이디/비번을 찾았으면 더이상 읽지 않는다
                 break;
         }
-        if(!flag)
-            std::cout<<"Login failed: "<<userID<<", "<<password<<std::endl;
+        if (!flag) {
+            std::cout << "Login failed: " << userID << ", " << password << std::endl;
+            Sleep(1000);
+        }
         file.close();
     }
     else //파일 불러오기 실패
     {
         std::cout << "Failed to open file" << std::endl;
+        Sleep(1000);
     }
 }
 

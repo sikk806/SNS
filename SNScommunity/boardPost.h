@@ -7,6 +7,8 @@
 #include <sstream>
 //#include <curses.h>
 #include <stdlib.h>
+#include <cctype>
+#include <cstdio>
 
 using namespace std;
 

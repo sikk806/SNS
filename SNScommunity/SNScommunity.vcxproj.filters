@@ -24,19 +24,19 @@
     <ClCompile Include="LogIn.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="SignUp.cpp">
+    <ClCompile Include="boardPost.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="boardPost.cpp">
+    <ClCompile Include="upSign.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MainPrompt.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="board.h">
       <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="SignUp.h">
-      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="boardPost.h">
       <Filter>헤더 파일</Filter>
@@ -45,6 +45,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="LogIn.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="upSign.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

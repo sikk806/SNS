@@ -2,6 +2,8 @@
 #define _AFXDLL
 #define _CRT_SECURE_NO_WARNINGS
 #include "boardPost.h"
+#include "upSign.h"
+#include "LogIn.h"
 #include <afxwin.h> // for windows header ( 실행 안되면 afx.h )
 #include <iostream>
 #include <fstream>
@@ -10,6 +12,8 @@
 #include <vector>
 #include <sstream>
 #include <stdlib.h>
+#include <cstdio>
+#include <ctime>
 
 
 using namespace std;

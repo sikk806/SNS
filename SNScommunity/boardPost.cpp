@@ -1,20 +1,20 @@
 #include "boardPost.h"
 // #include <curses.h> // cls
 //#include <Windows.h>
-#include <cctype>
+//#include <cctype>
 // #include <unistd.h> // sleep
-#include <cstdio>
+//#include <cstdio>
 
 using namespace std;
 
 // string _title;
 // string _contents;
 // string _date;
-// int _report;
 // int _recommand;
 // string comment;
 // int _datanum;
 // string _userid;
+// int _report;
 
 boardPost::boardPost()
 {
@@ -129,7 +129,7 @@ void boardPost::Post(string _filename, string _userid)
                     //back show
                 }
                 //(s.size() != s1.size()) ||
-                else if (s.size() < 2 || s.size() > 100  )
+                else if (s.size() < 2 || s.size() > 101  )
                 {
                     cout << "잘못된 입력방식입니다." << endl;
                     Sleep(1000);
@@ -273,7 +273,7 @@ void boardPost::Post(string _filename, string _userid)
                             break;
                         }
                         //(s.size() != s1.size()) ||
-                        else if (title.size() < 2 || title.size() > 35 )
+                        else if (title.size() < 2 || title.size() > 36 )
                         {
                             cout << "잘못된 입력방식입니다\n";
                             Sleep(1000);
@@ -299,7 +299,7 @@ void boardPost::Post(string _filename, string _userid)
                             {
                                 break;
                             }
-                            else if (contents.size() < 2 || contents.size() > 300 )
+                            else if (contents.size() < 2 || contents.size() > 301 )
                             {
                                 cout << "잘못된 입력방식입니다\n";
                                 Sleep(1000);
@@ -370,6 +370,7 @@ void boardPost::Post(string _filename, string _userid)
             string sub_goMain = _goMain.substr(0, 13);
             Board b;
             b.mainPost(_userid, sub_goMain, 0);
+            break;
         }
         else
         {

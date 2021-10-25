@@ -1,6 +1,4 @@
 #include "board.h"
-#include <cstdio>
-#include <ctime>
 using namespace std;
 
 Board::Board() {
@@ -17,7 +15,7 @@ void Board::setColor(unsigned short text) {
 
 void Board::selectCategory(string _userid) {
 	system("cls");
-	cout << "========== =================" << endl;
+	cout << "============================" << endl;
 	cout << endl;
 	cout << "      카테고리 선택" << endl;
 	cout << endl;
@@ -44,7 +42,7 @@ void Board::selectCategory(string _userid) {
 		mainPost(_userid, _category, 0);
 	}
 	else if (_select == "0") {
-		// go home
+		return;
 	}
 	else {
 		cout << "입력 형식이 맞지 않습니다. 다시 입력해주세요... ";
@@ -63,41 +61,52 @@ void Board::mainPost(string _userid, string _category, int _getFile) {
 		_getFile = _cntFile;
 	}
 	
-	for (int i = 0; i < 10; i++) {
-		// 파일명은 자연수만 가능 (0이하로는 금지)
-		if (_getFile == 0) {
-			break;
-		}
-		// 파일명은 파일 최대 갯수를 넘을 수 없음.
-		else if (_getFile > _cntFile) {
-			break;
-		}
-		string _fname = to_string(_getFile);
-		string _filename = _category + "/" + _fname + ".txt";
+	if (_cntFile == 0) {
+		cout << "글을 작성하여 첫 포스트를 남겨주세요!" << endl;
+	}
+	else {
+		for (int i = 0; i < 10; i++) {
+			// 파일명은 자연수만 가능 (0이하로는 금지)
+			if (_getFile == 0) {
+				break;
+			}
+			// 파일명은 파일 최대 갯수를 넘을 수 없음.
+			else if (_getFile > _cntFile) {
+				break;
+			}
+			string _fname = to_string(_getFile);
+			string _filename = _category + "/" + _fname + ".txt";
 
-		ifstream openpost(_filename);
+			ifstream openpost(_filename);
 
-		string line;
-		getline(openpost, line);
-		stringstream ss(line);
+			string line;
+			getline(openpost, line);
+			stringstream ss(line);
 
-		vector<string> data;
+			vector<string> data;
 
-		while (getline(ss, line, '/')) {
-			data.push_back(line);
+			while (getline(ss, line, '/')) {
+				data.push_back(line);
+			}
+			if (stoi(data[5]) >= 10 && (stoi(data[5]) / stoi(data[6])) >= 1) {
+				cout << i << ". " << "신고가 많은 글입니다." << endl;
+				cout << "	- 글을 보시려면 " << i << "번을 입력해주세요." << endl;
+			}
+			else {
+				cout << i << ". " << data[3] << endl;
+				
+				if (data[4].length() > 20) {
+					string _substring = data[4].substr(0, 20);
+					cout << "	- " << _substring << "..." << endl;
+				}
+				else {
+					cout << "	- " << data[4] << endl;
+				}
+			}
+			_getFile--;
+
+			openpost.close();
 		}
-		
-		cout << i << ". " << data[3] << endl;
-		if (data[4].length() > 20) {
-			string _substring = data[4].substr(0, 20);
-			cout << "	- " << _substring << endl;
-		}
-		else {
-			cout << "	- " << data[4] << endl;
-		}
-		_getFile--;
-
-		openpost.close();
 	}
 
 	cout << "Page. " << (_cntFile - (_getFile+1))/10+1 << "/" << (_cntFile/10 + 1) << endl;
