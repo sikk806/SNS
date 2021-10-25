@@ -27,12 +27,14 @@ void Board::selectCategory(string _userid) {
 	cout << endl;
 	cout << "      4. 졸업생 게시판" << endl;
 	cout << endl;
+	cout << endl;
+	cout << "      0. 로그아웃" << endl;
+	cout << endl;
 	cout << "===========================" << endl;
 
 	string _select;
 	cout << endl;
-	cout << "게시판을 선택해주세요. (1~4)" << endl;
-	cout << "로그아웃을 원하시면 0을 입력해주세요. : ";
+	cout << "게시판을 선택해주세요. (0~4) : " << endl;
 	cin >> _select;
 
 	if (_select == "1" || _select == "2" || _select == "3" || _select == "4") {
@@ -194,7 +196,7 @@ void Board::createPost(string _userid, string _category, int _postnum) {
 		mainPost(_userid, _category, 0);
 	}
 	else if (_title.size() < 2 || _title.size() > 35) {
-		cout << "제목의 길이는 2자 이상 30자 이하 입니다.";
+		cout << "제목의 길이는 2자 이상 35자 이하 입니다.";
 		Sleep(1000);
 		createPost(_userid, _category, _befPostnum);
 	}
@@ -207,7 +209,7 @@ void Board::createPost(string _userid, string _category, int _postnum) {
 			mainPost(_userid, _category, 0);
 		}
 		else if (_content.size() < 2 || _content.size() > 300) {
-			cout << "본문의 길이는 2자 이상 30자 이하 입니다.";
+			cout << "본문의 길이는 2자 이상 300자 이하 입니다.";
 			Sleep(1000);
 			createPost(_userid, _category, _befPostnum);
 		}
