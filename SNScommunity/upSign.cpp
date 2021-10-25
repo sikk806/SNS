@@ -90,7 +90,7 @@ bool SignUp::sign_up_main_() {
     if (_id == "b" || _id == "B")
         return false;   //  만약 b/B 가 입력되면 false 로 return
     while (!is_correct_id_(_id)) {
-        std::cout << "잘못된 입력방십입니다\n";
+        std::cout << "잘못된 입력방식입니다\n";
         Sleep(1000);
         // system("clear");  //    for mac command
         system("cls"); //    for windows command
@@ -111,7 +111,7 @@ bool SignUp::sign_up_main_() {
         if (_id == "b" || _id == "B")
             return false;   //  만약 b/B 가 입력되면 false 로 return
         while (!is_correct_id_(_id)) {
-            std::cout << "잘못된 입력방십입니다\n";
+            std::cout << "잘못된 입력방식입니다\n";
             Sleep(1000);
             // system("clear");  //    for mac command
             system("cls"); //    for windows command
@@ -130,7 +130,7 @@ bool SignUp::sign_up_main_() {
     if (_pw == "b" || _pw == "B")
         return false;   //  만약 b/B 가 입력되면 false 로 return
     while (!is_correct_pw_(_pw)) {
-        std::cout << "잘못된 입력방십입니다\n";
+        std::cout << "잘못된 입력방식입니다\n";
         Sleep(1000);
         // system("clear");  //    for mac command
         system("cls"); //    for windows command
