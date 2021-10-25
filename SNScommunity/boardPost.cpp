@@ -129,7 +129,7 @@ void boardPost::Post(string _filename, string _userid)
                     //back show
                 }
                 //(s.size() != s1.size()) ||
-                else if (s.size() < 2 || s.size() > 101  )
+                else if (s.size() < 2 || s.size() > 100  )
                 {
                     cout << "잘못된 입력방식입니다." << endl;
                     Sleep(1000);
@@ -273,7 +273,7 @@ void boardPost::Post(string _filename, string _userid)
                             break;
                         }
                         //(s.size() != s1.size()) ||
-                        else if (title.size() < 2 || title.size() > 36 )
+                        else if (title.size() < 2 || title.size() > 35 )
                         {
                             cout << "잘못된 입력방식입니다\n";
                             Sleep(1000);
@@ -299,7 +299,7 @@ void boardPost::Post(string _filename, string _userid)
                             {
                                 break;
                             }
-                            else if (contents.size() < 2 || contents.size() > 301 )
+                            else if (contents.size() < 2 || contents.size() > 300 )
                             {
                                 cout << "잘못된 입력방식입니다\n";
                                 Sleep(1000);
