@@ -194,8 +194,9 @@ void Board::createPost(string _userid, string _category, int _postnum) {
 	getline(cin, _title);
 	if (_title == "B" || _title == "b") {
 		mainPost(_userid, _category, 0);
+		return;
 	}
-	else if (_title.size() < 2 || _title.size() > 35) {
+	if (_title.size() < 2 || _title.size() > 35) {
 		cout << "제목의 길이는 2자 이상 35자 이하 입니다.";
 		Sleep(1000);
 		createPost(_userid, _category, _befPostnum);
@@ -207,6 +208,7 @@ void Board::createPost(string _userid, string _category, int _postnum) {
 		getline(cin, _content);
 		if (_content == "B" || _content == "b") {
 			mainPost(_userid, _category, 0);
+			return;
 		}
 		else if (_content.size() < 2 || _content.size() > 300) {
 			cout << "본문의 길이는 2자 이상 300자 이하 입니다.";
