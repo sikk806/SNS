@@ -110,11 +110,22 @@ void Board::mainPost(string _userid, string _category, int _getFile) {
 			openpost.close();
 		}
 	}
-
-	cout << "Page. " << (_cntFile - (_getFile+1))/10+1 << "/" << (_cntFile/10 + 1) << endl;
+	if (_cntFile % 10 == 0) {
+		cout << "Page. " << (_cntFile - (_getFile + 1)) / 10 + 1 << "/" << (_cntFile / 10) << endl;
+	}
+	else {
+		cout << "Page. " << (_cntFile - (_getFile + 1)) / 10 + 1 << "/" << (_cntFile / 10 + 1) << endl;
+	}
 	cout << "W/w. 게시글 작성" << endl;
-	if ((_cntFile - (_getFile + 1)) / 10 + 1 < (_cntFile / 10 + 1)) {
-		cout << "F/f. 다음 페이지로" << endl;
+	if (_cntFile % 10 == 0) {
+		if ((_cntFile - (_getFile + 1)) / 10 + 1 < (_cntFile / 10)) {
+			cout << "F/f. 다음 페이지로" << endl;
+		}
+	}
+	else {
+		if ((_cntFile - (_getFile + 1)) / 10 + 1 < (_cntFile / 10 + 1)) {
+			cout << "F/f. 다음 페이지로" << endl;
+		}
 	}
 
 	if ((_cntFile - (_getFile + 1)) / 10 + 1 <= 1) {
@@ -139,7 +150,7 @@ void Board::mainPost(string _userid, string _category, int _getFile) {
 		}
 		
 	}
-	else if (select == "F" || select == "f") {
+	else if (select == "F" || select == "f" && _cntFile > 10) {
 		mainPost(_userid, _category, _getFile);
 	}
 	else if (select == "W" || select == "w") {
