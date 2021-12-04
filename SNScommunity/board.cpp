@@ -311,3 +311,113 @@ bool Board::checkWords(string _words)
 
 	return false;
 }
+
+
+void Board::changeCategoryName(string user_id) {
+	system("cls");
+	string filename = "./data/manager_category.txt";
+	int numline = lineFile(filename);
+	ifstream openpost(filename);
+	vector<string> nameOfCategory;
+	cout << "============================" << endl;
+	cout << endl;
+	cout << "      바꿀 카테고리" << endl;
+	cout << endl;
+
+	for (int i = 1; i < numline; i++) {
+		string line;
+		getline(openpost, line);
+		stringstream ss(line);
+
+		vector<string> data;
+
+		while (getline(ss, line, '	')) {
+			data.push_back(line);
+		}
+		cout << "      " << i << "." << data[1] << endl;
+		nameOfCategory.push_back(data[1]);
+		cout << endl;
+	}
+
+	cout << "============================" << endl;
+	int selectCategory;
+	cout << endl;
+	cout << "변경할 카테고리를 선택해주세요.(최대 " << numline << "까지) : ";
+	cin >> selectCategory;
+	openpost.close();
+	changeName(user_id, selectCategory, nameOfCategory);
+}
+
+void Board::changeName(string user_id, int selectCategory, vector<string>& name) {
+	system("cls");
+	string _changeName;
+	cout << "============================" << endl;
+	cout << endl;
+	cout << "	변경할 이름을 입력해주세요." << endl;
+	cout << "	";
+	cin >> _changeName;
+	if (_changeName == "B" || _changeName == "b") {
+		managerCategory(user_id);
+	}
+	else if (_changeName.length() >= 2 && _changeName.length() <= 10) {
+		for (int i = 0; i < name.size(); i++) {
+			if (_changeName == name[i] && i != selectCategory - 1) {
+				cout << "중복되는 이름이 있습니다.";
+				changeName(user_id, selectCategory, name);
+			}
+			else {
+				string check;
+				cout << "변경하시겠습니까? (Y/y) or (N/n)";
+				cin >> check;
+				if (check == "Y" || check == "y") {
+					name[selectCategory - 1] = _changeName;
+					string filename = "./data/manager_category.txt";
+					ofstream openpost(filename);
+					vector<string> reset;
+					for (int i = 0; i < name.size(); i++) {
+						string resetName = "";
+						resetName += "post_";
+						resetName += to_string(i + 1);
+						resetName += "	";
+						resetName += name[i];
+						//resetName += "\n";
+						cout << resetName;
+						Sleep(1000);
+						openpost << resetName << endl;
+						//reset.push_back(resetName);
+
+					}
+					cout << "변경하였습니다." << endl;
+					managerCategory(user_id);
+					break;
+				}
+			}
+		}
+	}
+}
+
+void Board::addCategory(string user_id) {
+
+}
+
+void Board::mergeCategory(string user_id) {
+
+}
+
+void Board::deleteCategory(string user_id) {
+
+}
+
+int Board::lineFile(string _filename) {
+	int _cnt = 0;
+
+	ifstream openpost(_filename);
+
+	while (!openpost.eof()) {
+		string line;
+		getline(openpost, line);
+		_cnt++;
+	}
+
+	return _cnt;
+}
