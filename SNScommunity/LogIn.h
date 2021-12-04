@@ -3,10 +3,13 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+<<<<<<< HEAD
+=======
 #include <sstream>
 #include <vector>
 
 using namespace std;
+>>>>>>> 44207a1c629cab69e37bebb3459f0749e48b34f5
 
 using std::string;
 class Login

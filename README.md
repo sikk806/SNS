@@ -3,3 +3,5 @@
 
 git-hub에서 바로 받은 zip 파일 입니다.
 git 주소 : https://github.com/sikk806/SNS.git
+
+실행시 구성을 Debug x86 으로 설정해야합니다.

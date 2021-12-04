@@ -1,9 +1,9 @@
 #include "boardPost.h"
-// #include <curses.h> // cls
-//#include <Windows.h>
-//#include <cctype>
-// #include <unistd.h> // sleep
-//#include <cstdio>
+// #include <curses.h>
+#include <Windows.h>
+#include <cctype>
+#include <unistd.h>
+#include <cstdio>
 
 using namespace std;
 
@@ -54,74 +54,128 @@ int boardPost::check_(string s)
     return 0;
 }
 
-//≥™¡ﬂø° ∆ƒ∂ÛπÃ≈Õ∑Œ ø¨µø«ÿº≠ πﬁæ∆æﬂ«—¥Ÿ.
+//ÔøΩÔøΩÔøΩﬂøÔøΩ ÔøΩƒ∂ÔøΩÔøΩÔøΩÕ∑ÔøΩ ÔøΩÔøΩÔøΩÔøΩÔøΩÿºÔøΩ ÔøΩﬁæ∆æÔøΩÔøΩ—¥ÔøΩ.
 void boardPost::Post(string _filename, string _userid)
 {
     while (1)
     {
+        int com_num = 0;
         string _file = "./data/";
         string _postname = _file + _filename;
-
         fstream postinfo;
         postinfo.open(_postname, ios::in | ios::out);
         string line;
+        string s;
+        char cstr[1000];
         getline(postinfo, line);
         stringstream ss(line);
         vector<string> data;
-
-        while (getline(ss, line, '/'))
+        stringstream aa;
+        postinfo.seekg(0, ios::end);
+        int size = postinfo.tellg();
+        s.resize(size);
+        postinfo.seekg(0, ios::beg);
+        postinfo.read(&s[0], size);
+        // s.erase(remove(s.begin(), s.end(), '\n'), s.end());
+        strcpy(cstr, s.c_str());
+        char *ptr = strtok(cstr, "\t");
+        while (ptr != NULL)
         {
-            data.push_back(line);
+            string st;
+            st = ptr;
+            data.push_back(st);
+            ptr = strtok(NULL, "\t");
         }
         postinfo.close();
-        system("cls"); // WindowsøÎ
-        // system("clear"); // MacøÎ system("cls")
+        if (data.size() == 6)
+        {
+            com_num = 0;
+        }
+        else
+        {
+            int count = data.size();
+            com_num = (count - 7) / 2;
+        }
+
+          system("cls");
+        // system("clear"); // MacÏö© system("cls")
 
         cout << "============================" << endl;
         cout << data[2] << endl;
-        cout << "¡¶∏Ò "
+        cout << "ÔøΩÔøΩÔøΩÔøΩ "
             << " : " << data[3] << endl;
-        cout << "∫ªπÆ"
+        cout << "ÔøΩÔøΩÔøΩÔøΩ"
             << " : " << data[4] << endl;
-        cout << "Ω≈∞Ì"
-            << ": " << data[5] << " √ﬂ√µ"
+        cout << "ÔøΩ≈∞ÔøΩ"
+            << ": " << data[5] << " ÔøΩÔøΩ√µ"
             << ": " << data[6] << endl;
         cout << "============================" << endl;
-        cout << "¥Ò±€" << endl;
+        cout << "ÎåìÍ∏Ä" << endl;
+        int j = 1;
         for (int i = 7; i < data.size(); i++)
         {
-            cout << "¿Õ∏Ì"
-                << " : " << data[i] << endl;
+
+            if (i % 2 != 0)
+            {
+                cout << j++ << ". " << _userid << " : ";
+            }
+            else
+            {
+                cout << data[i] << endl;
+            }
         }
         cout << "============================" << endl;
-        cout << "1.¥Ò±€ ¿€º∫"
-            << "/"
-            << " 2.Ω≈∞Ì"
-            << "/"
-            << " 3.√ﬂ√µ"
-            << "/"
-            << " 4.ºˆ¡§ "
-            << "/"
-            << " µ⁄∑Œ∞°±‚(B/b)" << endl;
+        cout << "1.ÎåìÍ∏Ä ÏûëÏÑ±"
+             << "/"
+             << " 2.Ïã†Í≥†"
+             << "/"
+             << " 3.Ï∂îÏ≤ú"
+             << "/"
+             << " 4.ÏàòÏ†ï "
+             << "/"
+             << " 5.ÎåìÍ∏Ä ÏÇ≠Ï†ú "
+             << "/"
+             << " 6.Í≤åÏãúÍ∏Ä ÏÇ≠Ï†ú "
+             << "/"
+             << " Îí§Î°úÍ∞ÄÍ∏∞(B/b)" << endl;
         string command;
         cin >> command;
+        cin.ignore();
         if (command == "1")
         {
-            //¥Ò±€ ¿€º∫√¢
+            //ÔøΩÔøΩÔøΩ ÔøΩ€ºÔøΩ√¢
             while (1)
             {
-                system("cls"); // Window
-                //system("clear");
-                cout << "¥Ò±€ : ";
+                system("cls");
+                // system("clear");
+                cout << "ÎåìÍ∏Ä : ";
                 string s;
-                cin.ignore();
-                getline(cin, s);
-
+                // cin.ignore();
+                // getline(cin, s);
+                string s1;
+                while (1)
+                {
+                    // cin.ignore();
+                    getline(cin, s1);
+                    if (s1.find('\t') == string::npos)
+                    {
+                        s = s + s1 + '\n';
+                    }
+                    else
+                    {
+                        int index = s1.find('\t');
+                        for (int i = 0; i < index; i++)
+                        {
+                            s = s + s1.at(i);
+                        }
+                        break;
+                    }
+                }
                 if (s.empty())
                 {
-                    cout << "¿ﬂ∏¯µ» ¿‘∑¬πÊΩƒ¿‘¥œ¥Ÿ." << endl;
-                    Sleep(1000);
-                    //  sleep(1);
+                    cout << "ÏûòÎ™ªÎêú ÏûÖÎ†•Î∞©ÏãùÏûÖÎãàÎã§1" << endl;
+                       Sleep(1000);
+                    // sleep(1);
                 }
                 else if (s.size() == 1 && (s.compare("b") == 0 || s.compare("B") == 0))
                 {
@@ -129,23 +183,26 @@ void boardPost::Post(string _filename, string _userid)
                     //back show
                 }
                 //(s.size() != s1.size()) ||
-                else if (s.size() < 2 || s.size() > 100  )
+                else if (s.size() < 2 || s.size() > 100)
                 {
-                    cout << "¿ﬂ∏¯µ» ¿‘∑¬πÊΩƒ¿‘¥œ¥Ÿ." << endl;
-                    Sleep(1000);
-                    //  sleep(1);
+                    cout << "ÏûòÎ™ªÎêú ÏûÖÎ†•Î∞©ÏãùÏûÖÎãàÎã§3" << endl;
+                       Sleep(1000);
+                    // sleep(1);
                 }
                 else
                 {
                     string a;
-                    cout << "¿€º∫¿ª øœ∑·«œΩ√∞⁄Ω¿¥œ±Ó?(y or n)";
+                    cout << "ÔøΩ€ºÔøΩÔøΩÔøΩ ÔøΩœ∑ÔøΩÔøΩœΩ√∞⁄ΩÔøΩÔøΩœ±ÔøΩ?(y or n)";
                     cin >> a;
                     if (a == "y" || a == "Y")
                     {
+                        data.push_back(_userid);
                         data.push_back(s);
                         postinfo.open(_postname, ios::app);
+                        postinfo << _userid;
+                        postinfo.put('\t');
                         postinfo << s;
-                        postinfo.put('/');
+                        postinfo.put('\t');
                         postinfo.close();
                         break;
                     }
@@ -156,9 +213,9 @@ void boardPost::Post(string _filename, string _userid)
                     }
                     else
                     {
-                        cout << "¿ﬂ∏¯µ» ¿‘∑¬πÊΩƒ¿‘¥œ¥Ÿ." << endl;
-                        Sleep(1000);
-                        //  sleep(1);
+                        cout << "ÏûòÎ™ªÎêú ÏûÖÎ†•Î∞©ÏãùÏûÖÎãàÎã§3" << endl;
+                          Sleep(1000);
+                        // sleep(1);
                         //back show
                     }
                 }
@@ -166,13 +223,13 @@ void boardPost::Post(string _filename, string _userid)
         }
         else if (command == "2")
         {
-            cout << "Ω≈∞Ì∏¶ «œΩ√∞⁄Ω¿¥œ±Ó?" << endl;
+            cout << "ÔøΩ≈∞ÔøΩÔøΩÔøΩ ÔøΩœΩ√∞⁄ΩÔøΩÔøΩœ±ÔøΩ?" << endl;
             string command_report;
             cin >> command_report;
             cin.ignore();
             if (command_report == "Y" || command_report == "y")
             {
-                //Ω≈∞Ìºˆ += 1
+                //ÔøΩ≈∞ÔøΩÔøΩÔøΩ += 1
                 fstream post_content;
                 post_content.open(_postname, ios::out);
                 int num_report = stoi(data[5]);
@@ -181,35 +238,35 @@ void boardPost::Post(string _filename, string _userid)
                 for (int j = 0; j < 7; j++)
                 {
                     post_content << data[j];
-                    post_content.put('/');
+                    post_content.put('\t');
                 }
                 for (int i = 7; i < data.size(); i++)
                 {
                     post_content << data[i];
-                    post_content.put('/');
+                    post_content.put('\t');
                 }
                 post_content.close();
             }
             else if (command_report == "N" || command_report == "n")
             {
-                //Ω≈∞Ì √Îº“
+                //ÔøΩ≈∞ÔøΩ ÔøΩÔøΩÔøΩ
             }
             else
             {
-                //¿‘∑¬ø¿∑˘
-                cout << "¿ﬂ∏¯µ» ¿‘∑¬¿‘¥œ¥Ÿ." << endl;
+                //ÏûÖÎ†•Ïò§Î•ò
+                cout << "ÏûòÎ™ªÎêú ÏûÖÎ†•ÏûÖÎãàÎã§." << endl;
                 Sleep(1000);
-                //  sleep(1);
+                // sleep(1);
             }
         }
         else if (command == "3")
         {
-            cout << "√ﬂ√µ¿ª «œΩ√∞⁄Ω¿¥œ±Ó?" << endl;
+            cout << "ÔøΩÔøΩ√µÔøΩÔøΩ ÔøΩœΩ√∞⁄ΩÔøΩÔøΩœ±ÔøΩ?" << endl;
             string command_recommand;
             cin >> command_recommand;
             if (command_recommand == "Y" || command_recommand == "y")
             {
-                //√ﬂ√µºˆ += 1
+                //ÔøΩÔøΩ√µÔøΩÔøΩ += 1
                 int num_recommand = stoi(data[6]);
                 num_recommand += 1;
                 data[6] = to_string(num_recommand);
@@ -218,127 +275,182 @@ void boardPost::Post(string _filename, string _userid)
                 for (int j = 0; j < 7; j++)
                 {
                     post_content << data[j];
-                    post_content.put('/');
+                    post_content.put('\t');
                 }
                 for (int i = 7; i < data.size(); i++)
                 {
                     post_content << data[i];
-                    post_content.put('/');
+                    post_content.put('\t');
                 }
                 post_content.close();
             }
             else if (command_recommand == "N" || command_recommand == "n")
             {
-                //√ﬂ√µ√Îº“
+                //ÔøΩÔøΩ√µÔøΩÔøΩÔøΩ
             }
             else
             {
-                //¿‘∑¬ø¿∑˘
-                cout << "¿ﬂ∏¯µ» ¿‘∑¬¿‘¥œ¥Ÿ." << endl;
+                //ÏûÖÎ†•Ïò§Î•ò
+                cout << "ÏûòÎ™ªÎêú ÏûÖÎ†•ÏûÖÎãàÎã§." << endl;
                 Sleep(1000);
-                //  sleep(1);
+                // sleep(1);
             }
         }
 
         else if (command == "4")
         {
-            //********user_id øÕ data[1] ∫Ò±≥ æÀ∞Ì∏Æ¡Ú « ø‰!*********
-            if (_userid == data[1])
+            //********user_id ÏôÄ data[1] ÎπÑÍµê ÏïåÍ≥†Î¶¨Ï¶ò ÌïÑÏöî!*********
+            if (_userid == data[1] || _userid == "manager")
             {
                 system("cls");
-                //  system("clear"); // MacøÎ system("cls")
+                // system("clear"); // MacÏö© system("cls")
                 string change;
-                //∞‘Ω√±€ ¿€º∫¿⁄øÕ ºˆ¡§«œ∑¡¥¬ ªÁøÎ¿⁄¿« æ∆¿Ãµ∞° ∞∞¥Ÿ∏È
-                cout << "∞‘Ω√±€¿ª ºˆ¡§«œΩ√∞⁄Ω¿¥œ±Ó? (Y/y or N/n)" << endl;
+                //ÔøΩ‘Ω√±ÔøΩ ÔøΩ€ºÔøΩÔøΩ⁄øÔøΩ ÔøΩÔøΩÔøΩÔøΩÔøΩœ∑ÔøΩÔøΩÔøΩ ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ ÔøΩÔøΩÔøΩÃµÔøΩ ÔøΩÔøΩÔøΩŸ∏ÔøΩ
+                cout << "ÔøΩ‘Ω√±ÔøΩÔøΩÔøΩ ÔøΩÔøΩÔøΩÔøΩÔøΩœΩ√∞⁄ΩÔøΩÔøΩœ±ÔøΩ? (Y/y or N/n)" << endl;
                 cin >> change;
+                cin.ignore();
+
+                // else
+                // {                                                              //Í≤åÏãúÍ∏Ä ÏÇ≠Ï†ú Í∞ÄÎä•
+                //     postinfo.open(_postname, ios::in | ios::out | ios::trunc); //Í≤åÏãúÍ∏Ä Îç∞Ïù¥ÌÑ∞ÌååÏùº ÎÇ¥Ïö© Ï†ÑÎ∂Ä ÏÇ≠Ï†ú
+                //     postinfo.close();
+                //     cout << "Í≤åÏãúÍ∏Ä ÏÇ≠Ï†ú" << endl;
+                        Sleep(1000);
+                    // sleep(1);
+                //     break; //Í≤åÏãúÍ∏ÄÎ™©Î°ùÏúºÎ°ú Ïù¥Îèô
+                // }
                 if (change == "Y" || change == "y")
                 {
-                    while (1)
+                    if (com_num != 0)
                     {
-                        system("cls");
-                        //  system("clear");
-                        cout << "¡¶∏Ò : ";
-                        string title;
-                        cin.ignore(); // ∞≥«‡πÆ¿⁄(Enter) ¿‘∑¬¿ª ∏∑±‚¿ß«ÿº≠ ≥÷æÓ¡ÿ ∏ﬁΩÓµÂ
-                        getline(cin, title);
-
-                        if (title.empty())
+                        cout << "ÎåìÍ∏ÄÏù¥ Ìïú Í∞ú Ïù¥ÏÉÅ Ï°¥Ïû¨Ìï©ÎãàÎã§" << endl;
+                        // sleep(1);
+                    }
+                    else
+                    {
+                        while (1)
                         {
-                            cout << "¿ﬂ∏¯µ» ¿‘∑¬πÊΩƒ¿‘¥œ¥Ÿ\n";
-                            Sleep(1000);
-                            //  sleep(1);
-                        }
-                        else if (title.size() == 1 && (title.compare("b") == 0 || title.compare("B") == 0))
-                        {
-                            break;
-                        }
-                        //(s.size() != s1.size()) ||
-                        else if (title.size() < 2 || title.size() > 35 )
-                        {
-                            cout << "¿ﬂ∏¯µ» ¿‘∑¬πÊΩƒ¿‘¥œ¥Ÿ\n";
-                            Sleep(1000);
-                            //  sleep(1);
-                        }
-                        //¿‘∑¬ ∞ÀªÁø‰º“∏¶ ∏µŒ ≈Î∞˙«œø¥¿ª∂ß
-                        else
-                        {
-                            system("cls");
-                            //  system("clear");
-                            cout << "∫ªπÆ : ";
-                            string contents;
-                            // cin.ignore(); // ∞≥«‡πÆ¿⁄(Enter) ¿‘∑¬¿ª ∏∑±‚¿ß«ÿº≠ ≥÷æÓ¡ÿ ∏ﬁΩÓµÂ
-                            getline(cin, contents);
-
-                            if (contents.empty())
+                              system("cls");
+                            // system("clear");
+                            cout << "Ï†úÎ™© : ";
+                            string title;
+                            // cin.ignore(); // Í∞úÌñâÎ¨∏Ïûê(Enter) ÏûÖÎ†•ÏùÑ ÎßâÍ∏∞ÏúÑÌï¥ÏÑú ÎÑ£Ïñ¥Ï§Ä Î©îÏèòÎìú
+                            // getline(cin, title);
+                            string s1;
+                            while (1)
                             {
-                                cout << "¿ﬂ∏¯µ» ¿‘∑¬πÊΩƒ¿‘¥œ¥Ÿ\n";
-                                Sleep(1000);
-                                //  sleep(1);
-                            }
-                            else if (contents.size() == 1 && (contents.compare("b") == 0 || contents.compare("B") == 0))
-                            {
-                                break;
-                            }
-                            else if (contents.size() < 2 || contents.size() > 300 )
-                            {
-                                cout << "¿ﬂ∏¯µ» ¿‘∑¬πÊΩƒ¿‘¥œ¥Ÿ\n";
-                                Sleep(1000);
-                                //  sleep(1);
-                            }
-                            else
-                            {
-                                //∆ƒ¿œø≠æÓº≠ ºˆ¡§«ÿæﬂ¥Ô
-                                string modify;
-                                cout << "∞‘Ω√±€ ºˆ¡§¿ª øœ∑·«œΩ√∞⁄Ω¿¥œ±Ó?" << endl;
-                                cin >> modify;
-                                if (modify == "Y" || modify == "y")
+                                //cin.ignore();
+                                getline(cin, s1);
+                                if (s1.find('\t') == string::npos)
                                 {
-                                    fstream post_content;
-                                    post_content.open(_postname, ios::out);
-                                    data[3] = title;
-                                    data[4] = contents;
-                                    for (int j = 0; j < 7; j++)
-                                    {
-                                        post_content << data[j];
-                                        post_content.put('/');
-                                    }
-                                    for (int i = 7; i < data.size(); i++)
-                                    {
-                                        post_content << data[i];
-                                        post_content.put('/');
-                                    }
-                                    post_content.close();
-                                    break;
-                                }
-                                else if (modify == "N" || modify == "n")
-                                {
-                                    break;
+                                    title = title + s1 + '\n';
                                 }
                                 else
                                 {
-                                    cout << "¿ﬂ∏¯µ» ¿‘∑¬πÊΩƒ¿‘¥œ¥Ÿ\n";
+                                    int index = s1.find('\t');
+                                    for (int i = 0; i < index; i++)
+                                    {
+                                        title = title + s1.at(i);
+                                    }
+                                    break;
+                                }
+                            }
+                            if (title.empty())
+                            {
+                                cout << "ÏûòÎ™ªÎêú ÏûÖÎ†•Î∞©ÏãùÏûÖÎãàÎã§" << endl;
+                                 Sleep(1000);
+                                // sleep(1);
+                            }
+                            else if (title.size() == 1 && (title.compare("b") == 0 || title.compare("B") == 0))
+                            {
+                                break;
+                            }
+                            //(s.size() != s1.size()) ||
+                            else if (title.size() < 2 || title.size() > 35)
+                            {
+                                cout << "ÏûòÎ™ªÎêú ÏûÖÎ†•Î∞©ÏãùÏûÖÎãàÎã§" << endl;
+                                 Sleep(1000);
+                                // sleep(1);
+                            }
+                            //ÏûÖÎ†• Í≤ÄÏÇ¨ÏöîÏÜåÎ•º Î™®Îëê ÌÜµÍ≥ºÌïòÏòÄÏùÑÎïå
+                            else
+                            {
+                                 system("cls");
+                                // system("clear");
+                                cout << "Î≥∏Î¨∏ : ";
+                                // cin.ignore();
+                                string contents;
+                                // getline(cin, contents);
+                                string s2;
+                                while (1)
+                                {
+                                    //cin.ignore();
+                                    getline(cin, s2);
+                                    if (s2.find('\t') == string::npos)
+                                    {
+                                        contents = contents + s2 + '\n';
+                                    }
+                                    else
+                                    {
+                                        int index = s2.find('\t');
+                                        for (int i = 0; i < index; i++)
+                                        {
+                                            contents = contents + s2.at(i);
+                                        }
+                                        break;
+                                    }
+                                }
+                                if (contents.empty())
+                                {
+                                    cout << "ÏûòÎ™ªÎêú ÏûÖÎ†•Î∞©ÏãùÏûÖÎãàÎã§" << endl;
                                     Sleep(1000);
-                                    //  sleep(1);
+                                    // sleep(1);
+                                }
+                                else if (contents.size() == 1 && (contents.compare("b") == 0 || contents.compare("B") == 0))
+                                {
+                                    break;
+                                }
+                                else if (contents.size() < 2 || contents.size() > 300)
+                                {
+                                    cout << "ÏûòÎ™ªÎêú ÏûÖÎ†•Î∞©ÏãùÏûÖÎãàÎã§" << endl;
+                                    Sleep(1000);
+                                    // sleep(1);
+                                }
+                                else
+                                {
+                                    //ÌååÏùºÏó¥Ïñ¥ÏÑú ÏàòÏ†ïÌï¥ÏïºÎåê
+                                    string modify;
+                                    cout << "Í≤åÏãúÍ∏Ä ÏàòÏ†ïÏùÑ ÏôÑÎ£åÌïòÏãúÍ≤†ÏäµÎãàÍπå?" << endl;
+                                    cin >> modify;
+                                    if (modify == "Y" || modify == "y")
+                                    {
+                                        fstream post_content;
+                                        post_content.open(_postname, ios::out);
+                                        data[3] = title;
+                                        data[4] = contents;
+                                        for (int j = 0; j < 7; j++)
+                                        {
+                                            post_content << data[j];
+                                            post_content.put('\t');
+                                        }
+                                        for (int i = 7; i < data.size(); i++)
+                                        {
+                                            post_content << data[i];
+                                            post_content.put('\t');
+                                        }
+                                        post_content.close();
+                                        break;
+                                    }
+                                    else if (modify == "N" || modify == "n")
+                                    {
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        cout << "ÏûòÎ™ªÎêú ÏûÖÎ†•Î∞©ÏãùÏûÖÎãàÎã§" << endl;
+                                           Sleep(1000);
+                                        // sleep(1);
+                                    }
                                 }
                             }
                         }
@@ -349,22 +461,90 @@ void boardPost::Post(string _filename, string _userid)
                 }
                 else
                 {
-                    cout << "¿ﬂ∏¯µ» ¿‘∑¬πÊΩƒ¿‘¥œ¥Ÿ\n";
-                    Sleep(1000);
-                    //  sleep(1);
+                    cout << "ÏûòÎ™ªÎêú ÏûÖÎ†•Î∞©ÏãùÏûÖÎãàÎã§" << endl;
+                       Sleep(1000);
+                    // sleep(1);
                 }
             }
             else
             {
-                cout << "ªÁøÎ¿⁄∞° ¿œƒ°«œ¡ˆ æ Ω¿¥œ¥Ÿ" << endl;
+                cout << "ÏÇ¨Ïö©ÏûêÍ∞Ä ÏùºÏπòÌïòÏßÄ ÏïäÏäµÎãàÎã§" << endl;
                 Sleep(1000);
-                //  sleep(1);
+                // sleep(1);
+            }
+        }
+        else if (command == "5")
+        { //ÎåìÍ∏Ä ÏÇ≠Ï†ú - user_id Î∂ÄÎ∂Ñ ÏùºÏπò
+            cout << "ÎåìÍ∏Ä Î≤àÌò∏Î•º ÏûÖÎ†•Ìï¥Ï£ºÏÑ∏Ïöî." << endl;
+            string com;
+            cin >> com;
+            int num = stoi(com);
+            if (_userid == data[7 + 2 * (num - 1)] || _userid == "manager")
+            {
+                fstream post_content;
+                data.erase(data.begin() + (7 + 2 * (num - 1)));
+                data.erase(data.begin() + (7 + 2 * (num - 1)));
+
+                post_content.open(_postname, ios::out);
+                for (int j = 0; j < 7; j++)
+                {
+                    post_content << data[j];
+                    post_content.put('\t');
+                }
+                for (int i = 7; i < data.size(); i++)
+                {
+                    post_content << data[i];
+                    post_content.put('\t');
+                }
+                post_content.close();
+            }
+            else
+            {
+                cout << "ÏûòÎ™ªÎêú ÏûÖÎ†•ÏûÖÎãàÎã§." << endl;
+                Sleep(1000);
+                // sleep(1);
+            }
+        }
+        else if (command == "6")
+        { //Í≤åÏãúÍ∏Ä ÏÇ≠Ï†ú - user_id Î∂ÄÎ∂Ñ ÏùºÏπò , ÎåìÍ∏Ä ÌïòÎÇò Ïù¥ÏÉÅ Ï°¥Ïû¨Ìï† Í≤ΩÏö∞ ÏÇ≠Ï†ú x
+            if (_userid == "manager")
+            {
+                postinfo.open(_postname, ios::in | ios::out | ios::trunc); //Í≤åÏãúÍ∏Ä Îç∞Ïù¥ÌÑ∞ÌååÏùº ÎÇ¥Ïö© Ï†ÑÎ∂Ä ÏÇ≠Ï†ú
+                postinfo.close();
+                cout << "Í≤åÏãúÍ∏Ä ÏÇ≠Ï†ú" << endl;
+                Sleep(1000);
+                // sleep(1);
+                break; //Í≤åÏãúÍ∏ÄÎ™©Î°ùÏúºÎ°ú Ïù¥Îèô
+            }
+            if (_userid == data[1])
+            {
+                if (com_num != 0)
+                {
+                    cout << "ÎåìÍ∏ÄÏù¥ Ìïú Í∞ú Ïù¥ÏÉÅ Ï°¥Ïû¨Ìï©ÎãàÎã§" << endl;
+                    Sleep(1000);
+                    // sleep(1);
+                }
+                else
+                {                                                              //Í≤åÏãúÍ∏Ä ÏÇ≠Ï†ú Í∞ÄÎä•
+                    postinfo.open(_postname, ios::in | ios::out | ios::trunc); //Í≤åÏãúÍ∏Ä Îç∞Ïù¥ÌÑ∞ÌååÏùº ÎÇ¥Ïö© Ï†ÑÎ∂Ä ÏÇ≠Ï†ú
+                    postinfo.close();
+                    cout << "Í≤åÏãúÍ∏Ä ÏÇ≠Ï†ú" << endl;
+                    Sleep(1000);
+                    // sleep(1);
+                    break; //Í≤åÏãúÍ∏ÄÎ™©Î°ùÏúºÎ°ú Ïù¥Îèô
+                }
+            }
+            else
+            {
+                cout << "ÏûëÏÑ±ÏûêÍ∞Ä ÏïÑÎãôÎãàÎã§." << endl;
+                Sleep(1000);
+                // sleep(1);
             }
         }
 
         else if (command == "B" || command == "b")
         {
-            //∞‘Ω√±€∏Ò∑œ¿∏∑Œ ∞°æﬂ«‘
+            //ÔøΩ‘Ω√±€∏ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ ÔøΩÔøΩÔøΩÔøΩÔøΩÔøΩ
             string _goMain = "./data/";
             _goMain += _filename;
             string sub_goMain = _goMain.substr(0, 13);
@@ -374,9 +554,18 @@ void boardPost::Post(string _filename, string _userid)
         }
         else
         {
-            cout << "¿ﬂ∏¯µ» ¿‘∑¬¿‘¥œ¥Ÿ." << endl;
-            Sleep(1000);
-            //  sleep(1);
+            cout << "ÏûòÎ™ªÎêú ÏûÖÎ†•ÏûÖÎãàÎã§." << endl;
+             Sleep(1000);
+            // sleep(1);
         }
     }
 }
+
+// int main(void)
+// {
+//     boardPost b;
+//     //    string _postname = "post_1/1.txt";
+//     string _postname = "post_1/1.txt";
+//     string _userid = "aaaa";
+//     b.Post(_postname, _userid);
+// }

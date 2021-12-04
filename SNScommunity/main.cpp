@@ -14,9 +14,27 @@ int main()
 {
 	setting_data_directory();
 
+	/*ifstream openpost("./data/manager_category.txt");
 
-	Login lg_;
-	lg_.main_promp();
+	for (int i = 0; i < 4; i++) {
+		string line;
+		getline(openpost, line);
+		stringstream ss(line);
+
+		vector<string> data;
+
+		while (getline(ss, line, '	')) {
+			data.push_back(line);
+		}
+
+		cout << data[1] << endl;
+	}*/
+
+	Board bd;
+	bd.selectCategory("manager");
+
+	//Login lg_;
+	//lg_.main_promp();
 }
 
 void setting_data_directory()
