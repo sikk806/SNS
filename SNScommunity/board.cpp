@@ -19,22 +19,22 @@ void Board::selectCategory(string _userid) {
 	system("cls");
 	cout << "========== =================" << endl;
 	cout << endl;
-	cout << "      Ä«Å×°í¸® ¼±ÅÃ" << endl;
+	cout << "      Ä«ï¿½×°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½" << endl;
 	cout << endl;
-	cout << "      1. ÀÚÀ¯ °Ô½ÃÆÇ" << endl;
+	cout << "      1. ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½" << endl;
 	cout << endl;
-	cout << "      2. IT °Ô½ÃÆÇ" << endl;
+	cout << "      2. IT ï¿½Ô½ï¿½ï¿½ï¿½" << endl;
 	cout << endl;
-	cout << "      3. »õ³»±â °Ô½ÃÆÇ" << endl;
+	cout << "      3. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½" << endl;
 	cout << endl;
-	cout << "      4. Á¹¾÷»ý °Ô½ÃÆÇ" << endl;
+	cout << "      4. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½" << endl;
 	cout << endl;
 	cout << "===========================" << endl;
 
 	string _select;
 	cout << endl;
-	cout << "°Ô½ÃÆÇÀ» ¼±ÅÃÇØÁÖ¼¼¿ä. (1~4)" << endl;
-	cout << "·Î±×¾Æ¿ôÀ» ¿øÇÏ½Ã¸é 0À» ÀÔ·ÂÇØÁÖ¼¼¿ä. : ";
+	cout << "ï¿½Ô½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½. (1~4)" << endl;
+	cout << "ï¿½Î±×¾Æ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï½Ã¸ï¿½ 0ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½. : ";
 	cin >> _select;
 
 	// ascii '1' = 49 || '4' = 52
@@ -48,7 +48,7 @@ void Board::selectCategory(string _userid) {
 		// go home
 	}
 	else {
-		cout << "ÀÔ·Â Çü½ÄÀÌ ¸ÂÁö ¾Ê½À´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä... ";
+		cout << "ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½. ï¿½Ù½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½... ";
 		Sleep(1000);
 		selectCategory(_userid);
 	}
@@ -65,11 +65,11 @@ void Board::mainPost(string _userid, string _category, int _getFile) {
 	}
 	
 	for (int i = 0; i < 10; i++) {
-		// ÆÄÀÏ¸íÀº ÀÚ¿¬¼ö¸¸ °¡´É (0ÀÌÇÏ·Î´Â ±ÝÁö)
+		// ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (0ï¿½ï¿½ï¿½Ï·Î´ï¿½ ï¿½ï¿½ï¿½ï¿½)
 		if (_getFile == 0) {
 			break;
 		}
-		// ÆÄÀÏ¸íÀº ÆÄÀÏ ÃÖ´ë °¹¼ö¸¦ ³ÑÀ» ¼ö ¾øÀ½.
+		// ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		else if (_getFile > _cntFile) {
 			break;
 		}
@@ -104,19 +104,18 @@ void Board::mainPost(string _userid, string _category, int _getFile) {
 	}
 
 	cout << "Page. " << (_cntFile - (_getFile+1))/10+1 << "/" << (_cntFile/10 + 1) << endl;
-	cout << "W/w. °Ô½Ã±Û ÀÛ¼º" << endl;
+	cout << "W/w. ï¿½Ô½Ã±ï¿½ ï¿½Û¼ï¿½" << endl;
 	if ((_cntFile - (_getFile + 1)) / 10 + 1 < (_cntFile / 10 + 1)) {
-		cout << "F/f. ´ÙÀ½ ÆäÀÌÁö·Î" << endl;
+		cout << "F/f. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" << endl;
 	}
-
 	if ((_cntFile - (_getFile + 1)) / 10 + 1 <= 1) {
-		cout << "B/b. Ä«Å×°í¸® ¼±ÅÃ" << endl;
+		cout << "B/b. Ä«ï¿½×°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½" << endl;
 	}
 	else {
-		cout << "B/b. ÀÌÀü ÆäÀÌÁö·Î" << endl;
+		cout << "B/b. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" << endl;
 	}
 	string select;
-	cout << "ÀÔ·Â : ";
+	cout << "ï¿½Ô·ï¿½ : ";
 	cin >> select;
 	if (select == "B" || select == "b") {
 		if ((_cntFile - _getFile-1) / 10 < 1) {
@@ -141,17 +140,17 @@ void Board::mainPost(string _userid, string _category, int _getFile) {
 	else if (select == "0" || select == "1" || select == "2" || select == "3" || select == "4" || select == "5" || select == "6" || select == "7" || select == "8" || select == "9") {
 		int _select = stoi(select);
 		if ((_cntFile - (_getFile + 1)) / 10 + 1 == (_cntFile / 10 + 1) && _select  >= _cntFile%10) {
-			cout << "ÀÔ·Â Çü½ÄÀÌ ¸ÂÁö ¾Ê½À´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä... ";
+			cout << "ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½. ï¿½Ù½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½... ";
 			Sleep(1000);
 			_getFile = _cntFile % 10;
 			mainPost(_userid, _category, _getFile);
 		}
 		else {
-			int _postnum = _cntFile - ((_cntFile - (_getFile + 1)) / 10) * 10 - _select; // ³Ñ°ÜÁÙ ÆÄÀÏ ¹øÈ£
+			int _postnum = _cntFile - ((_cntFile - (_getFile + 1)) / 10) * 10 - _select; // ï¿½Ñ°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
 		}
 	}
 	else {
-		cout << "ÀÔ·Â Çü½ÄÀÌ ¸ÂÁö ¾Ê½À´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä... ";
+		cout << "ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½. ï¿½Ù½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½... ";
 		Sleep(1000);
 		if ((_cntFile - (_getFile + 1)) / 10 + 1 == (_cntFile / 10 + 1)) {
 			_getFile = _cntFile % 10;
@@ -173,11 +172,11 @@ void Board::createPost(string _userid, string _category, int _postnum) {
 
 	vector<string> total;
 
-	cout << "Á¦¸ñ : ";
+	cout << "ï¿½ï¿½ï¿½ï¿½ : ";
 	cin >> _title;
 	cout << "=========================================";
 	cout << endl;
-	cout << "º»¹® : ";
+	cout << "ï¿½ï¿½ï¿½ï¿½ : ";
 	cin >> _content;
 
 	_path += _category + "/" + _currentnum + ".txt";
@@ -197,8 +196,8 @@ void Board::createPost(string _userid, string _category, int _postnum) {
 
 		string _datetime(buffer);
 
-		// ÆÄÀÏ ³»¿ë ÀÛ¼º (ÆÄÀÏ¹øÈ£/À¯Àú¾ÆÀÌµð/Æ÷¸ÅÆÃµÈ³¯Â¥/Á¦¸ñ/º»¹®)
-		// ÃßÃµ¼ö³ª ½Å°í¼ö´Â ÃßÈÄ¿¡ ´Ù¸¥ ÇÔ¼ö¿¡¼­ Ãß°¡ÇØÁÖ±â
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ (ï¿½ï¿½ï¿½Ï¹ï¿½È£/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ÃµÈ³ï¿½Â¥/ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½)
+		// ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ä¿ï¿½ ï¿½Ù¸ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
 		total.push_back(_currentnum);
 		total.push_back("/");
 		total.push_back(_userid);
@@ -212,10 +211,10 @@ void Board::createPost(string _userid, string _category, int _postnum) {
 		savepost.close();
 	}
 	else {
-		cerr << "Á¤º¸¸¦ ºÒ·¯¿À´Âµ¥¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù." << endl;
+		cerr << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½Âµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½." << endl;
 	}
 	
-	// ÆÄÀÏ ÀÛ¼ºÀÌ ³¡³ª¸é °»½ÅµÈ ÆÄ¶ó¹ÌÅÍ·Î ´Ù½Ã mainPost ÇÔ¼ö È£Ãâ
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Åµï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½Í·ï¿½ ï¿½Ù½ï¿½ mainPost ï¿½Ô¼ï¿½ È£ï¿½ï¿½
 	mainPost(_userid, _category, _postnum);
 
 }
@@ -246,7 +245,7 @@ bool Board::checkWords(string _words)
 {
 	string words = _words;
 
-	/* regex ¿¹¿ÜÃ³¸® ºÎºÐÀº ³ªÁß¿¡ */
+	/* regex ï¿½ï¿½ï¿½ï¿½Ã³ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß¿ï¿½ */
 
 	return false;
 }
