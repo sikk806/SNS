@@ -1,11 +1,13 @@
 #include "LogIn.h"
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <sstream>
-#include <vector>
 
-using std::string;
+Login::Login() {
+
+}
+
+Login::~Login() {
+
+}
+
 Login::Login(const string& ID, const string& pw)
     :userID(ID), password(pw)
 {
@@ -14,45 +16,50 @@ Login::Login(const string& ID, const string& pw)
 
 void Login::login()
 {
-    std::ifstream file("data/userInfo.txt", std::ios::in); //íŒŒì¼ ë¶ˆëŸ¬ì˜¤ê¸°
-    std::vector<string> result;
+    ifstream file("./data/member_information.txt", ios::in); //ÆÄÀÏ ºÒ·¯¿À±â
+    vector<string> result;
     bool flag;
     if (file.is_open())
     {
         string user;
-        while(getline(file,user)) //íŒŒì¼ ì½ê¸°
+        while (getline(file, user)) //ÆÄÀÏ ÀĞ±â
         {
-            std::stringstream ss(user);
+            stringstream ss(user);
             flag = false;
             result.clear();
-            while(ss.good())   //idì™€ pwê°€ì ¸ì˜¤ê¸°
+            while (ss.good())   //id¿Í pw°¡Á®¿À±â
             {
                 string substr;
-                getline(ss,substr,'/');
+                getline(ss, substr, '/');
                 result.push_back(substr);
             }
-            //íŒŒì¼ì—ì„œ ì½ì€ ì•„ì´ë””/ë¹„ë²ˆê³¼ ì¼ì¹˜í•˜ëŠ”ì§€ í™•ì¸
-            for(int i=0;i<result.size();i+=2)
+            //ÆÄÀÏ¿¡¼­ ÀĞÀº ¾ÆÀÌµğ/ºñ¹ø°ú ÀÏÄ¡ÇÏ´ÂÁö È®ÀÎ
+            for (int i = 0; i < result.size(); i += 2)
             {
-                if(result.at(i) == userID && result.at(i+1) == password)
+                if (result.at(i) == userID && result.at(i + 1) == password)
                 {
-                    // ë¡œê·¸ì¸ ì„±ê³µ
-                    std::cout<<"Login successful: "<<userID<<", "<<password<<std::endl;
+                    // ·Î±×ÀÎ ¼º°ø
+                    cout << "Login successful: " << userID << ", " << password << endl;
+                    Sleep(1000);
                     flag = true;
-                    //ë‹¤ìŒ ê³¼ì • ì§„í–‰
-
+                    //´ÙÀ½ °úÁ¤ ÁøÇà
+                    Board b;
+                    b.selectCategory(userID);
                 }
             }
-            if(flag) //ì´ë¯¸ ì¼ì¹˜í•˜ëŠ” ì•„ì´ë””/ë¹„ë²ˆì„ ì°¾ì•˜ìœ¼ë©´ ë”ì´ìƒ ì½ì§€ ì•ŠëŠ”ë‹¤
+            if (flag) //ÀÌ¹Ì ÀÏÄ¡ÇÏ´Â ¾ÆÀÌµğ/ºñ¹øÀ» Ã£¾ÒÀ¸¸é ´õÀÌ»ó ÀĞÁö ¾Ê´Â´Ù
                 break;
         }
-        if(!flag)
-            std::cout<<"Login failed: "<<userID<<", "<<password<<std::endl;
+        if (!flag) {
+            cout << "Login failed: " << userID << ", " << password << endl;
+            Sleep(1000);
+        }
         file.close();
     }
-    else //íŒŒì¼ ë¶ˆëŸ¬ì˜¤ê¸° ì‹¤íŒ¨
+    else //ÆÄÀÏ ºÒ·¯¿À±â ½ÇÆĞ
     {
-        std::cout << "Failed to open file" << std::endl;
+        cout << "Failed to open file" << endl;
+        Sleep(1000);
     }
 }
 

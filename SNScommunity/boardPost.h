@@ -1,3 +1,5 @@
+#pragma once
+#include "board.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -5,6 +7,8 @@
 #include <sstream>
 //#include <curses.h>
 #include <stdlib.h>
+#include <cctype>
+#include <cstdio>
 
 using namespace std;
 

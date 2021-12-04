@@ -1,18 +1,20 @@
+#pragma once
+#include "board.h"
 #include <iostream>
 #include <cstdlib>
 #include <fstream>
 #include <string>
 
-class SignUp{
+class SignUp {
 private:
     std::string id;
     std::string pw;
 
 public:
-    // SignUp();
+    SignUp();
     SignUp(std::string id, std::string pw);
     ~SignUp();
-    
+
     std::string get_id_();
     std::string get_pw_();
 

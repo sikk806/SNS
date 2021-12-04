@@ -10,11 +10,11 @@ using namespace std;
 // string _title;
 // string _contents;
 // string _date;
-// int _report;
 // int _recommand;
 // string comment;
 // int _datanum;
 // string _userid;
+// int _report;
 
 boardPost::boardPost()
 {
@@ -54,7 +54,7 @@ int boardPost::check_(string s)
     return 0;
 }
 
-//나중에 파라미터로 연동해서 받아야한다.
+//���߿� �Ķ���ͷ� �����ؼ� �޾ƾ��Ѵ�.
 void boardPost::Post(string _filename, string _userid)
 {
     while (1)
@@ -102,13 +102,13 @@ void boardPost::Post(string _filename, string _userid)
 
         cout << "============================" << endl;
         cout << data[2] << endl;
-        cout << "제목 "
-             << " : " << data[3] << endl;
-        cout << "본문"
-             << " : " << data[4] << endl;
-        cout << "신고"
-             << ": " << data[5] << " 추천"
-             << ": " << data[6] << endl;
+        cout << "���� "
+            << " : " << data[3] << endl;
+        cout << "����"
+            << " : " << data[4] << endl;
+        cout << "�Ű�"
+            << ": " << data[5] << " ��õ"
+            << ": " << data[6] << endl;
         cout << "============================" << endl;
         cout << "댓글" << endl;
         int j = 1;
@@ -143,7 +143,7 @@ void boardPost::Post(string _filename, string _userid)
         cin.ignore();
         if (command == "1")
         {
-            //댓글 작성창
+            //��� �ۼ�â
             while (1)
             {
                 system("cls");
@@ -192,7 +192,7 @@ void boardPost::Post(string _filename, string _userid)
                 else
                 {
                     string a;
-                    cout << "작성을 완료하시겠습니까?(y or n)";
+                    cout << "�ۼ��� �Ϸ��Ͻðڽ��ϱ�?(y or n)";
                     cin >> a;
                     if (a == "y" || a == "Y")
                     {
@@ -223,13 +223,13 @@ void boardPost::Post(string _filename, string _userid)
         }
         else if (command == "2")
         {
-            cout << "신고를 하시겠습니까?" << endl;
+            cout << "�Ű��� �Ͻðڽ��ϱ�?" << endl;
             string command_report;
             cin >> command_report;
             cin.ignore();
             if (command_report == "Y" || command_report == "y")
             {
-                //신고수 += 1
+                //�Ű��� += 1
                 fstream post_content;
                 post_content.open(_postname, ios::out);
                 int num_report = stoi(data[5]);
@@ -249,7 +249,7 @@ void boardPost::Post(string _filename, string _userid)
             }
             else if (command_report == "N" || command_report == "n")
             {
-                //신고 취소
+                //�Ű� ���
             }
             else
             {
@@ -261,12 +261,12 @@ void boardPost::Post(string _filename, string _userid)
         }
         else if (command == "3")
         {
-            cout << "추천을 하시겠습니까?" << endl;
+            cout << "��õ�� �Ͻðڽ��ϱ�?" << endl;
             string command_recommand;
             cin >> command_recommand;
             if (command_recommand == "Y" || command_recommand == "y")
             {
-                //추천수 += 1
+                //��õ�� += 1
                 int num_recommand = stoi(data[6]);
                 num_recommand += 1;
                 data[6] = to_string(num_recommand);
@@ -286,7 +286,7 @@ void boardPost::Post(string _filename, string _userid)
             }
             else if (command_recommand == "N" || command_recommand == "n")
             {
-                //추천취소
+                //��õ���
             }
             else
             {
@@ -305,8 +305,8 @@ void boardPost::Post(string _filename, string _userid)
                 system("cls");
                 // system("clear"); // Mac용 system("cls")
                 string change;
-                //게시글 작성자와 수정하려는 사용자의 아이디가 같다면
-                cout << "게시글을 수정하시겠습니까? (Y/y or N/n)" << endl;
+                //�Խñ� �ۼ��ڿ� �����Ϸ��� ������� ���̵� ���ٸ�
+                cout << "�Խñ��� �����Ͻðڽ��ϱ�? (Y/y or N/n)" << endl;
                 cin >> change;
                 cin.ignore();
 
@@ -544,7 +544,12 @@ void boardPost::Post(string _filename, string _userid)
 
         else if (command == "B" || command == "b")
         {
-            //게시글목록으로 가야함
+            //�Խñ۸������ ������
+            string _goMain = "./data/";
+            _goMain += _filename;
+            string sub_goMain = _goMain.substr(0, 13);
+            Board b;
+            b.mainPost(_userid, sub_goMain, 0);
             break;
         }
         else

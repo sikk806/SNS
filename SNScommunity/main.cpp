@@ -1,17 +1,78 @@
+#pragma once
 #include "board.h"
-#include "SignUp.h"
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <Windows.h>
-#include <vector>
-#include <sstream>
+#include "boardPost.h"
+#include "upSign.h"
+#include "LogIn.h"
 
+#include <io.h>
+#include <direct.h>
 using namespace std;
 
-int main(void) {
+void setting_data_directory();
 
-	Board b;
-	b.selectCategory("aaaa");
+int main()
+{
+	setting_data_directory();
 
+
+	Login lg_;
+	lg_.main_promp();
+}
+
+void setting_data_directory()
+{
+	int data_directory_exists = _access("./data", 00);
+	if (data_directory_exists == -1)
+	{
+		int nResult = _mkdir("./data");
+
+		if (nResult == 0)
+			cout << "데이터 디렉토리 생성" << endl;
+		else
+			cout << "데이터 디렉토리 생성 실패" << endl;
+	}
+
+	int data_post_1_directory_exists = _access("./data/post_1", 00);
+	if (data_post_1_directory_exists == -1)
+	{
+		int nResult = _mkdir("./data/post_1");
+
+		if (nResult == 0)
+			cout << "post_1 데이터 디렉토리 생성" << endl;
+		else
+			cout << "post_1 데이터 디렉토리 생성 실패" << endl;
+	}
+
+	int data_post_2_directory_exists = _access("./data/post_2", 00);
+	if (data_post_2_directory_exists == -1)
+	{
+		int nResult = _mkdir("./data/post_2");
+
+		if (nResult == 0)
+			cout << "post_2 데이터 디렉토리 생성" << endl;
+		else
+			cout << "post_2 데이터 디렉토리 생성 실패" << endl;
+	}
+
+	int data_post_3_directory_exists = _access("./data/post_3", 00);
+	if (data_post_3_directory_exists == -1)
+	{
+		int nResult = _mkdir("./data/post_3");
+
+		if (nResult == 0)
+			cout << "post_3 데이터 디렉토리 생성" << endl;
+		else
+			cout << "post_3 데이터 디렉토리 생성 실패" << endl;
+	}
+
+	int data_post_4_directory_exists = _access("./data/post_4", 00);
+	if (data_post_4_directory_exists == -1)
+	{
+		int nResult = _mkdir("./data/post_4");
+
+		if (nResult == 0)
+			cout << "post_4 데이터 디렉토리 생성" << endl;
+		else
+			cout << "post_4 데이터 디렉토리 생성 실패" << endl;
+	}
 }

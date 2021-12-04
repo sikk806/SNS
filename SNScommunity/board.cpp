@@ -1,6 +1,4 @@
 #include "board.h"
-#include <cstdio>
-#include <ctime>
 using namespace std;
 
 Board::Board() {
@@ -17,7 +15,7 @@ void Board::setColor(unsigned short text) {
 
 void Board::selectCategory(string _userid) {
 	system("cls");
-	cout << "========== =================" << endl;
+	cout << "============================" << endl;
 	cout << endl;
 	cout << "      Ä«ï¿½×°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½" << endl;
 	cout << endl;
@@ -29,15 +27,21 @@ void Board::selectCategory(string _userid) {
 	cout << endl;
 	cout << "      4. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½" << endl;
 	cout << endl;
+	cout << endl;
+	cout << "      0. ·Î±×¾Æ¿ô" << endl;
+	cout << endl;
 	cout << "===========================" << endl;
 
 	string _select;
 	cout << endl;
+<<<<<<< HEAD
 	cout << "ï¿½Ô½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½. (1~4)" << endl;
 	cout << "ï¿½Î±×¾Æ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï½Ã¸ï¿½ 0ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½. : ";
+=======
+	cout << "°Ô½ÃÆÇÀ» ¼±ÅÃÇØÁÖ¼¼¿ä. (0~4) : " << endl;
+>>>>>>> 44207a1c629cab69e37bebb3459f0749e48b34f5
 	cin >> _select;
 
-	// ascii '1' = 49 || '4' = 52
 	if (_select == "1" || _select == "2" || _select == "3" || _select == "4") {
 		string _category = "./data/post_";
 		_category += _select;
@@ -45,7 +49,7 @@ void Board::selectCategory(string _userid) {
 		mainPost(_userid, _category, 0);
 	}
 	else if (_select == "0") {
-		// go home
+		return;
 	}
 	else {
 		cout << "ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½. ï¿½Ù½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½... ";
@@ -64,6 +68,7 @@ void Board::mainPost(string _userid, string _category, int _getFile) {
 		_getFile = _cntFile;
 	}
 	
+<<<<<<< HEAD
 	for (int i = 0; i < 10; i++) {
 		// ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (0ï¿½ï¿½ï¿½Ï·Î´ï¿½ ï¿½ï¿½ï¿½ï¿½)
 		if (_getFile == 0) {
@@ -75,38 +80,79 @@ void Board::mainPost(string _userid, string _category, int _getFile) {
 		}
 		string _fname = to_string(_getFile);
 		string _filename = _category + "/" + _fname + ".txt";
-
-		ifstream openpost(_filename);
-
-		string line;
-		getline(openpost, line);
-		stringstream ss(line);
-
-		vector<string> data;
-
-		while (getline(ss, line, '/')) {
-			data.push_back(line);
-		}
-		
-		setColor(GREEN);
-		cout << i << ". " << data[3] << endl;
-		setColor(WHITE);
-		if (data[4].length() > 20) {
-			string _substring = data[4].substr(0, 20);
-			cout << "	- " << _substring << endl;
-		}
-		else {
-			cout << "	- " << data[4] << endl;
-		}
-		_getFile--;
-
-		openpost.close();
+=======
+	if (_cntFile == 0) {
+		cout << "±ÛÀ» ÀÛ¼ºÇÏ¿© Ã¹ Æ÷½ºÆ®¸¦ ³²°ÜÁÖ¼¼¿ä!" << endl;
 	}
+	else {
+		for (int i = 0; i < 10; i++) {
+			// ÆÄÀÏ¸íÀº ÀÚ¿¬¼ö¸¸ °¡´É (0ÀÌÇÏ·Î´Â ±ÝÁö)
+			if (_getFile == 0) {
+				break;
+			}
+			// ÆÄÀÏ¸íÀº ÆÄÀÏ ÃÖ´ë °¹¼ö¸¦ ³ÑÀ» ¼ö ¾øÀ½.
+			else if (_getFile > _cntFile) {
+				break;
+			}
+			string _fname = to_string(_getFile);
+			string _filename = _category + "/" + _fname + ".txt";
+>>>>>>> 44207a1c629cab69e37bebb3459f0749e48b34f5
+
+			ifstream openpost(_filename);
+
+			string line;
+			getline(openpost, line);
+			stringstream ss(line);
+
+			vector<string> data;
+
+			while (getline(ss, line, '/')) {
+				data.push_back(line);
+			}
+			if (stoi(data[5]) > 10 && (stoi(data[6]) / stoi(data[5])) < 1) {
+				cout << i << ". " << "½Å°í°¡ ¸¹Àº ±ÛÀÔ´Ï´Ù." << endl;
+				cout << "	- ±ÛÀ» º¸½Ã·Á¸é " << i << "¹øÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä." << endl;
+			}
+			else {
+				cout << i << ". " << data[3] << endl;
+				
+				if (data[4].length() > 20) {
+					string _substring = data[4].substr(0, 20);
+					cout << "	- " << _substring << "..." << endl;
+				}
+				else {
+					cout << "	- " << data[4] << endl;
+				}
+			}
+			_getFile--;
+
+			openpost.close();
+		}
+	}
+	if (_cntFile % 10 == 0) {
+		cout << "Page. " << (_cntFile - (_getFile + 1)) / 10 + 1 << "/" << (_cntFile / 10) << endl;
+	}
+	else {
+		cout << "Page. " << (_cntFile - (_getFile + 1)) / 10 + 1 << "/" << (_cntFile / 10 + 1) << endl;
+	}
+<<<<<<< HEAD
 
 	cout << "Page. " << (_cntFile - (_getFile+1))/10+1 << "/" << (_cntFile/10 + 1) << endl;
 	cout << "W/w. ï¿½Ô½Ã±ï¿½ ï¿½Û¼ï¿½" << endl;
 	if ((_cntFile - (_getFile + 1)) / 10 + 1 < (_cntFile / 10 + 1)) {
 		cout << "F/f. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" << endl;
+=======
+	cout << "W/w. °Ô½Ã±Û ÀÛ¼º" << endl;
+	if (_cntFile % 10 == 0) {
+		if ((_cntFile - (_getFile + 1)) / 10 + 1 < (_cntFile / 10)) {
+			cout << "F/f. ´ÙÀ½ ÆäÀÌÁö·Î" << endl;
+		}
+	}
+	else {
+		if ((_cntFile - (_getFile + 1)) / 10 + 1 < (_cntFile / 10 + 1)) {
+			cout << "F/f. ´ÙÀ½ ÆäÀÌÁö·Î" << endl;
+		}
+>>>>>>> 44207a1c629cab69e37bebb3459f0749e48b34f5
 	}
 	if ((_cntFile - (_getFile + 1)) / 10 + 1 <= 1) {
 		cout << "B/b. Ä«ï¿½×°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½" << endl;
@@ -130,7 +176,7 @@ void Board::mainPost(string _userid, string _category, int _getFile) {
 		}
 		
 	}
-	else if (select == "F" || select == "f") {
+	else if (select == "F" || select == "f" && _cntFile > 10) {
 		mainPost(_userid, _category, _getFile);
 	}
 	else if (select == "W" || select == "w") {
@@ -146,7 +192,17 @@ void Board::mainPost(string _userid, string _category, int _getFile) {
 			mainPost(_userid, _category, _getFile);
 		}
 		else {
+<<<<<<< HEAD
 			int _postnum = _cntFile - ((_cntFile - (_getFile + 1)) / 10) * 10 - _select; // ï¿½Ñ°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+=======
+			int _postnum = _cntFile - ((_cntFile - (_getFile + 1)) / 10) * 10 - _select; // ³Ñ°ÜÁÙ ÆÄÀÏ ¹øÈ£
+			string _pn = to_string(_postnum);
+			string subCategory = _category.substr(7, _category.size()-1);
+			string dir = subCategory + "/" + _pn + ".txt";
+
+			boardPost bP;
+			bP.Post(dir, _userid);
+>>>>>>> 44207a1c629cab69e37bebb3459f0749e48b34f5
 		}
 	}
 	else {
@@ -166,36 +222,68 @@ void Board::createPost(string _userid, string _category, int _postnum) {
 	//system("clear"); // Mac command
 	system("cls"); // Windows.h
 
-	string _title, _content, _path;
-
+	string _title = " ";
+	string _content = "";
+	string _path;
+	int _befPostnum = _postnum;
 	string _currentnum = to_string(++_postnum);
 
 	vector<string> total;
 
+<<<<<<< HEAD
 	cout << "ï¿½ï¿½ï¿½ï¿½ : ";
 	cin >> _title;
 	cout << "=========================================";
 	cout << endl;
 	cout << "ï¿½ï¿½ï¿½ï¿½ : ";
 	cin >> _content;
+=======
+	cout << "Á¦¸ñ : ";
+	cin.ignore();
+	getline(cin, _title);
+	if (_title == "B" || _title == "b") {
+		mainPost(_userid, _category, 0);
+		return;
+	}
+	if (_title.size() < 2 || _title.size() > 35) {
+		cout << "Á¦¸ñÀÇ ±æÀÌ´Â 2ÀÚ ÀÌ»ó 35ÀÚ ÀÌÇÏ ÀÔ´Ï´Ù.";
+		Sleep(1000);
+		createPost(_userid, _category, _befPostnum);
+	}
+	else {
+		cout << "=========================================";
+		cout << endl;
+		cout << "º»¹® : ";
+		getline(cin, _content);
+		if (_content == "B" || _content == "b") {
+			mainPost(_userid, _category, 0);
+			return;
+		}
+		else if (_content.size() < 2 || _content.size() > 300) {
+			cout << "º»¹®ÀÇ ±æÀÌ´Â 2ÀÚ ÀÌ»ó 300ÀÚ ÀÌÇÏ ÀÔ´Ï´Ù.";
+			Sleep(1000);
+			createPost(_userid, _category, _befPostnum);
+		}
+		else {
+>>>>>>> 44207a1c629cab69e37bebb3459f0749e48b34f5
 
-	_path += _category + "/" + _currentnum + ".txt";
 
-	ofstream savepost(_path);
+			_path += _category + "/" + _currentnum + ".txt";
 
-	if (savepost.is_open()) {
-		time_t rawtime;
-		tm* timeinfo;
-		char buffer[80];
+			ofstream savepost(_path);
 
-		time(&rawtime);
-		timeinfo = localtime(&rawtime);
+			if (savepost.is_open()) {
+				time_t rawtime;
+				tm* timeinfo;
+				char buffer[80];
 
-		strftime(buffer, 80, "%Y-%m-%d-%H-%M", timeinfo);
-		puts(buffer);
+				time(&rawtime);
+				timeinfo = localtime(&rawtime);
 
-		string _datetime(buffer);
+				strftime(buffer, 80, "%Y-%m-%d-%H-%M", timeinfo);
+				puts(buffer);
 
+<<<<<<< HEAD
 		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ (ï¿½ï¿½ï¿½Ï¹ï¿½È£/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ÃµÈ³ï¿½Â¥/ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½)
 		// ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ä¿ï¿½ ï¿½Ù¸ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
 		total.push_back(_currentnum);
@@ -216,6 +304,42 @@ void Board::createPost(string _userid, string _category, int _postnum) {
 	
 	// ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Åµï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½Í·ï¿½ ï¿½Ù½ï¿½ mainPost ï¿½Ô¼ï¿½ È£ï¿½ï¿½
 	mainPost(_userid, _category, _postnum);
+=======
+				string _datetime(buffer);
+
+				// ÆÄÀÏ ³»¿ë ÀÛ¼º (ÆÄÀÏ¹øÈ£/À¯Àú¾ÆÀÌµð/Æ÷¸ÅÆÃµÈ³¯Â¥/Á¦¸ñ/º»¹®)
+				// ÃßÃµ¼ö³ª ½Å°í¼ö´Â ÃßÈÄ¿¡ ´Ù¸¥ ÇÔ¼ö¿¡¼­ Ãß°¡ÇØÁÖ±â
+				total.push_back(_currentnum);
+				total.push_back("/");
+				total.push_back(_userid);
+				total.push_back("/");
+				total.push_back(_datetime);
+				total.push_back("/");
+				total.push_back(_title);
+				total.push_back("/");
+				total.push_back(_content);
+				total.push_back("/0/0/");
+			}
+			else {
+				cerr << "Á¤º¸¸¦ ºÒ·¯¿À´Âµ¥¿¡ ½ÇÆÐÇÏ¿´½À´Ï´Ù." << endl;
+			}
+
+			string _post = "";
+
+
+			for (int i = 0; i < total.size(); i++) {
+				_post += total[i];
+			}
+
+			savepost << _post;
+			savepost.close();
+
+
+			// ÆÄÀÏ ÀÛ¼ºÀÌ ³¡³ª¸é °»½ÅµÈ ÆÄ¶ó¹ÌÅÍ·Î ´Ù½Ã mainPost ÇÔ¼ö È£Ãâ
+			mainPost(_userid, _category, _postnum);
+		}
+	}
+>>>>>>> 44207a1c629cab69e37bebb3459f0749e48b34f5
 
 }
 
